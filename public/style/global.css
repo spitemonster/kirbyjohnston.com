@@ -1,0 +1,201 @@
+*, :before, :after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+img, picture, video, canvas, svg {
+  max-width: 100%;
+  display: block;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+:root {
+  --black: #071013;
+  --white: #e6e1db;
+  --dark-blue: #373f58;
+  --green: #307351;
+  --header-height: 3rem;
+  --container-width: 80ch;
+  --container-max-width: 1440px;
+  --container-min-padding: 1rem;
+  --container-inline-padding: max(var(--container-min-padding), calc((100vw - var(--container-width)) / 2));
+  scroll-behavior: smooth;
+}
+
+body.light {
+  --background: var(--white);
+  --foreground: var(--black);
+}
+
+body.dark {
+  --background: var(--black);
+  --foreground: var(--white);
+}
+
+.container {
+  padding-inline: var(--container-inline-padding);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Inter, sans-serif;
+  font-size: 1.25em;
+  transition: all .12s;
+}
+
+h1, h2, h3 {
+  font-family: IBM Plex Mono, monospace;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 1.842em;
+}
+
+h3 {
+  font-size: 1.3572em;
+}
+
+.frame {
+  height: calc(100vh - var(--header-height));
+  padding-block: var(--header-height);
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+}
+
+#top {
+  order: 1;
+}
+
+#about {
+  order: 3;
+}
+
+#contact {
+  order: 4;
+}
+
+.visually-hidden {
+  opacity: .001;
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+main {
+  background: inherit;
+  color: inherit;
+}
+
+nav {
+  height: var(--header-height);
+  border-top: 1px solid var(--foreground);
+  border-bottom: 1px solid var(--foreground);
+  background: inherit;
+  z-index: 3;
+  order: 2;
+  display: block;
+  position: sticky;
+  top: 0;
+}
+
+nav menu {
+  background: inherit;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+nav menu:after {
+  left: var(--base-width);
+  content: "...................................................................................................................................................................................................";
+  height: 100%;
+  position: absolute;
+  top: calc(1rem - 2px);
+}
+
+nav menu li {
+  width: var(--base-width);
+  background: inherit;
+  z-index: 2;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  transition: margin .384s;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+nav menu li:not(:last-child) {
+  width: calc(var(--base-width)  + 1rem);
+}
+
+nav a {
+  color: inherit;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+body[data-current="top"] li[data-target="top"], body[data-current="about"] li[data-target="about"], body[data-current="contact"] li[data-target="contact"] {
+  width: var(--base-width);
+  flex-shrink: 1;
+  margin-right: auto;
+}
+
+body.light #vis-mode .light, body.dark #vis-mode .dark {
+  display: none;
+}
+
+#vis-mode {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+}
+
+#vis-mode .light {
+  fill: var(--white);
+}
+
+#vis-mode .dark {
+  fill: var(--black);
+}
+
+/*# sourceMappingURL=global.css.map */
