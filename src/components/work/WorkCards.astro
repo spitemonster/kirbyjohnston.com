@@ -1,0 +1,10 @@
+---
+import { getCollection } from "astro:content"
+import WorkCard from "./WorkCard.astro"
+const work = await getCollection('work')
+---
+{ work.map(w => {
+	return (
+		<WorkCard client={w.data.client_name} platform={w.data.platform} summary={w.data.summary} url={w.data.url} />
+	)
+})}

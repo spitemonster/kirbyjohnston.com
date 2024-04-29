@@ -1,5 +1,4 @@
 window.addEventListener('DOMContentLoaded', () => {
-    console.log('shit!')
     const navEls = document.querySelectorAll('nav li')
     const visMode = document.querySelector('#vis-mode')
 
@@ -13,11 +12,12 @@ window.addEventListener('DOMContentLoaded', () => {
             })
         },
         {
-            threshold: 0.75,
+            threshold: 0.5,
         }
     )
 
     document.querySelectorAll('.frame').forEach((f) => {
+        console.log(f)
         observer.observe(f)
     })
 

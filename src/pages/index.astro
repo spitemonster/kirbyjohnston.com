@@ -1,143 +1,17 @@
 ---
-import MainLayout from '../layouts/Main.astro'
+import MainLayout from '../layouts/MainLayout.astro'
+import Main from '../components/main/Main.astro';
+import Work from '../components/work/Work.astro';
+import About from '../components/about/About.astro';
+import Contact from '../components/contact/Contact.astro';
 import Nav from '../components/Nav.astro'
+
 ---
 
-<MainLayout title="Kirby Johnston | Programmer | Musician | De Facto Funkman">
-    <main>
-        <Nav />
-        <div id="top" class="container frame">
-            <h1>Sup</h1>
-            <p>
-                I’m Kirby Johnston, a Web and Software Engineer with almost a
-                decade of experience working primarily with marketing agencies.
-                In this work I’ve honed a diverse set of skills that span the
-                full development lifecycle, from ideation through developent and
-                into launch and support. My work is driven by a practical
-                approach to development and an obsession with understanding how
-                things work from the bottom up.
-            </p>
-            <p>
-                Throughout my career I've cultivated experience and expertise in
-                a variety of programming languages, frameworks and concepts, a
-                flexibility which has been essential for the diverse projects to
-                which I've been attached. As with any of my contemporaries, I
-                carry a profound love for Javascript, its flexibility and its
-                frameworks, primarily with Vue and Svelte on the front end and
-                Express on the back.
-            </p>
-            <p>
-                My approach and philosophy has allowed me to deliver thorough,
-                lasting and performant solutions and build strong relationships
-                with clients throughout a number of platforms, including
-                Wordpress, Shopify, Vercel, Webflow and many others.
-            </p>
-        </div>
-        <div id="work" class="container frame">
-            <h1>Work</h1>
-            <p>
-                Get my resume <a
-                    href="https://drive.google.com/file/d/1tYIxi1rTyfJd_2bhGolFAicDoY9I4rqy/view?usp=drive_link"
-                    >here</a
-                > or via <a
-                    href="https://www.linkedin.com/in/kirby-johnston-04a743293/"
-                    >LinkedIn</a
-                >, visit my <a href="https://github.com/spitemonster">GitHub</a>
-                or see the links below for practical examples of my work.
-            </p>
-            <hr />
-            <figure class="work-card">
-                <img src="" alt="" />
-                <figcaption>
-                    <h2>Construction Estimating Institute</h2>
-                    <p>
-                        <a href="https://mycontractorexam.com/">Link</a> / Shopify
-                    </p>
-                    <p>
-                        Working as the sole architect and primary developer with
-                        a team of 1.25 on a very tight timeline, I was able to
-                        build an entirely fresh Shopify theme and a new CSS
-                        library to go with it and deliver a hugely performant
-                        project, not only on time but with days to spare, that
-                        exceeded client goals regarding site and sales
-                        performance post-launch.
-                    </p>
-                </figcaption>
-            </figure>
-            <figure class="work-card">
-                <figcaption>
-                    <h2>Contractor Training Center</h2>
-                    <p>
-                        <a href="https://contractortrainingcenter.com/">Link</a>
-                        / Shopify
-                    </p>
-                    <p>
-                        Working as the lead developer, we were tasked with
-                        adapting a client's Shopify theme to new designs. Unable
-                        to fully rebuild anything, my focus was on developing a
-                        keen understanding of the current theme and adapting
-                        both old and new content blocks to use the theme's
-                        content structure while improving overall performance
-                        and usability.
-                    </p>
-                </figcaption>
-            </figure>
-            <figure class="work-card">
-                <figcaption>
-                    <h2>The Westmoreland Museum</h2>
-                    <p>
-                        <a href="http://thewestmoreland.org">Link</a> / Wordpress
-                    </p>
-                    <p>
-                        Working as one of several developers on this project, my
-                        goals and achievements were to keep code in line with
-                        the team's standard and provide an overall performance
-                        audit before launch as well as perform ongoing
-                        maintenance and updates.
-                    </p>
-                </figcaption>
-            </figure>
-            <figure class="work-card">
-                <figcaption>
-                    <h2>Carnegie Museums of Pittsburgh</h2>
-                    <p>
-                        <a href="https://carnegiemuseums.org">Link</a> / Wordpress
-                    </p>
-                    <p>
-                        While the project was completed a while before I joined
-                        the team, I was given the keys to maintenance and client
-                        requests, including the Events section of the site which
-                        was built custom after determining that plugin solutions
-                        were either too expensive or too heavilty featured. My
-                        frequent work with the client developed into a strong
-                        client relationship.
-                    </p>
-                </figcaption>
-            </figure>
-        </div>
-        <div id="about" class="container frame">
-            <h1>About</h1>
-            <p>
-                When not working you could catch me making synthesizer bleep
-                bloops, rewatching Twin Peaks or enjoying a nice Jameson at the
-                neighborhood bar. You probably won't be able to catch me,
-                though; I'm quite sneaky.
-            </p>
-        </div>
-        <div id="contact" class="container frame">
-            <h1>Contact</h1>
-            <p>
-                Say hi via <a href="mailto:sup@kirbyjohnston.com?subject=👋 Sup"
-                    >email</a
-                >, <a href="https://instagram.com/spitemonster">Instagram</a> or
-                <a href="">Linkedin</a>.
-            </p>
-        </div>
-    </main>
+<MainLayout title="Just this guy, you know?">
+	<Main />
+	<Nav />
+	<Work />
+	<About />
+	<Contact />
 </MainLayout>
-<style>
-    main {
-        display: flex;
-        flex-direction: column;
-    }
-</style>

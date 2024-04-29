@@ -1,0 +1,14 @@
+---
+import { getEntry } from "astro:content";
+import Frame from "../../layouts/Frame.astro";
+import WorkCards from "./WorkCards.astro";
+
+const work = await getEntry('sections', 'work');
+const { Content, headings } = await work.render();
+---
+
+<Frame id="section--work">
+	<Content/>
+	<hr>
+	<WorkCards />
+</Frame>

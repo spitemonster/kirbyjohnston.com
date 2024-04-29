@@ -5,6 +5,11 @@ interface Props {
 
 const { title } = Astro.props
 import "../style/global.css"
+import '@fontsource/ibm-plex-mono/100.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/700.css';
+import '@fontsource/inter/200.css';
+import VisMode from '../components/VisMode.astro'
 ---
 
 <!doctype html>
@@ -16,16 +21,15 @@ import "../style/global.css"
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
-        
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;400;700&family=Inter:wght@200&display=swap"
-            rel="stylesheet"
-        />
     </head>
     <body class="dark">
-        <slot />
+		<VisMode />
+		<main>
+			<slot />
+		</main>
+        
     </body>
-    <script src="../script/global.js"></script>
+    <script>
+		import "../script/global.js"
+	</script>
 </html>
