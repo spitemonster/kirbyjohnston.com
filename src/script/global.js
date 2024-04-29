@@ -1,4 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
+    console.log('shit!')
     const navEls = document.querySelectorAll('nav li')
     const visMode = document.querySelector('#vis-mode')
 
