@@ -3,7 +3,7 @@ import { getEntry } from "astro:content";
 import Frame from "../../layouts/Frame.astro";
 
 const main = await getEntry('sections', 'main');
-const { Content, headings } = await main.render();
+const { Content } = await main.render();
 ---
 
 <Frame id="section--main">

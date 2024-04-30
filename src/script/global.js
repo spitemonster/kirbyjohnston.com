@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // setup intersection observer
     let observer = new IntersectionObserver(
-        (entries, observer) => {
+        (entries) => {
             entries.forEach((e) => {
                 if (e.isIntersecting) {
                     document.body.dataset.current = e.target.id
