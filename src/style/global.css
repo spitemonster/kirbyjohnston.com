@@ -63,6 +63,12 @@ h6 {
     scroll-behavior: smooth;
 }
 
+::selection,
+::-moz-selection {
+    background: var(--color-accent);
+    color: var(--color-background);
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background: var(--color-background);
@@ -71,20 +77,18 @@ body {
     transition: all var(--transition-time) ease;
 }
 
-@media (prefers-color-scheme: light) {
-    body {
-        --color-background: var(--color-white);
-        --color-foreground: var(--color-black);
-        --color-accent: var(--color-green);
-        --color-ob: var(--color-gray-light);
-    }
-}
-
 body.light {
     --color-background: var(--color-white);
     --color-foreground: var(--color-black);
     --color-accent: var(--color-green);
     --color-ob: var(--color-gray-light);
+}
+
+body.dark {
+    --color-background: var(--color-black);
+    --color-foreground: var(--color-white);
+    --color-accent: var(--color-light-green);
+    --color-ob: var(--color-gray-dark);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -96,11 +100,13 @@ body.light {
     }
 }
 
-body.dark {
-    --color-background: var(--color-black);
-    --color-foreground: var(--color-white);
-    --color-accent: var(--color-light-green);
-    --color-ob: var(--color-gray-dark);
+@media (prefers-color-scheme: light) {
+    body {
+        --color-background: var(--color-black);
+        --color-foreground: var(--color-white);
+        --color-accent: var(--color-light-green);
+        --color-ob: var(--color-gray-dark);
+    }
 }
 
 body.light #vis-mode .light {
@@ -133,6 +139,26 @@ h3 {
     font-size: 1.842em;
 }
 
+p + p,
+p + h1,
+p + h2,
+p + h3,
+h1 + p,
+h1 + h1,
+h1 + h2,
+h1 + h3,
+h2 + p,
+h2 + h1,
+h2 + h2,
+h2 + h3,
+h3 + p,
+h3 + h1,
+h3 + h3,
+h3 + h3 {
+    margin-top: 1rem;
+}
+
+// probably overkill and unnecessary
 a {
     color: var(--color-accent);
     text-decoration: none;
@@ -435,11 +461,4 @@ body[data-current='section--contact'] li[data-target='section--contact'] {
 main {
     display: flex;
     flex-direction: column;
-}
-
-p + p,
-h1 + p,
-h2 + p,
-h3 + p {
-    margin-top: 1rem;
 }
