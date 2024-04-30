@@ -43,17 +43,20 @@ h6 {
     --font-size-base: 16px;
     --color-black: #071013;
     --color-white: #e6e1db;
+    --color-gray-dark: #303637;
+    --color-gray-light: #bdbbb7;
     --color-dark-blue: #373f58;
     --color-green: #307351;
     --color-light-green: #56b35f;
     --header-height: 3rem;
-    --container-width: 80ch;
-    --container-max-width: 1440px;
+    --container-width: 50rem;
+    --container-max-width: 90rem;
     --container-min-padding: 1rem;
     --container-inline-padding: max(
         var(--container-min-padding),
         calc((100vw - var(--container-width)) / 2)
     );
+    --transition-time: 360ms;
 
     font-size: var(--font-size-base);
 
@@ -62,20 +65,42 @@ h6 {
 
 body {
     font-family: 'Inter', sans-serif;
-    background: var(--background);
-    color: var(--foreground);
+    background: var(--color-background);
+    color: var(--color-foreground);
     font-size: 1.25em;
-    transition: all 120ms ease;
+    transition: all var(--transition-time) ease;
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        --color-background: var(--color-white);
+        --color-foreground: var(--color-black);
+        --color-accent: var(--color-green);
+        --color-ob: var(--color-gray-light);
+    }
 }
 
 body.light {
-    --background: var(--color-white);
-    --foreground: var(--color-black);
+    --color-background: var(--color-white);
+    --color-foreground: var(--color-black);
+    --color-accent: var(--color-green);
+    --color-ob: var(--color-gray-light);
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        --color-background: var(--color-black);
+        --color-foreground: var(--color-white);
+        --color-accent: var(--color-light-green);
+        --color-ob: var(--color-gray-dark);
+    }
 }
 
 body.dark {
-    --background: var(--color-black);
-    --foreground: var(--color-white);
+    --color-background: var(--color-black);
+    --color-foreground: var(--color-white);
+    --color-accent: var(--color-light-green);
+    --color-ob: var(--color-gray-dark);
 }
 
 body.light #vis-mode .light {
@@ -96,6 +121,7 @@ h2,
 h3 {
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 400;
+    line-height: 1.2;
 }
 
 h1,
@@ -105,6 +131,140 @@ h2 {
 
 h3 {
     font-size: 1.842em;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    transition: color var(--transition-time) ease;
+    z-index: 1;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: var(--color-accent);
+        z-index: -1;
+    }
+
+    &::before {
+        width: 0;
+        height: 100%;
+        transition: width var(--transition-time) ease;
+    }
+
+    &::after {
+        height: 1px;
+        width: 100%;
+    }
+
+    &:hover,
+    &:focus {
+        color: var(--color-background);
+
+        &::before {
+            left: 0;
+            right: unset;
+            width: 100%;
+        }
+    }
+}
+
+hr {
+    color: var(--color-foreground);
+    width: 100%;
+    margin-block: 2rem;
+}
+
+nav {
+    order: 2;
+    height: var(--header-height);
+    display: block;
+    position: sticky;
+    top: 0;
+    border-top: 1px solid var(--color-foreground);
+    border-bottom: 1px solid var(--color-foreground);
+    background: inherit;
+    z-index: 3;
+
+    & > menu {
+        display: flex;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: inherit;
+
+        flex-direction: row;
+        list-style: none;
+        align-items: center;
+        align-content: center;
+
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+            position: absolute;
+            left: 0;
+            top: calc(1rem - 2px);
+            height: 100%;
+            content: '...................................................................................................................................................................................................';
+        }
+
+        & > li {
+            margin: 0;
+            padding: 0;
+            width: var(--base-width);
+            transition: width var(--transition-time) ease;
+            position: relative;
+            display: inline-block;
+            flex-shrink: 0;
+            background: transparent;
+            z-index: 2;
+            overflow: hidden;
+            height: 100%;
+
+            a {
+                color: var(--color-ob);
+                background: var(--color-background);
+                text-decoration: none;
+                text-transform: uppercase;
+                height: 100%;
+                width: var(--base-width);
+                display: inline-flex;
+                align-items: center;
+                justify-content: flex-start;
+                transition: all var(--transition-time) ease;
+
+                &::before,
+                &::after {
+                    display: none;
+                }
+            }
+
+            &:hover,
+            &:focus-within {
+                a {
+                    color: var(--color-foreground);
+                }
+            }
+        }
+    }
+}
+
+body[data-current='section--main'] li[data-target='section--main'],
+body[data-current='section--work'] li[data-target='section--work'],
+body[data-current='section--about'] li[data-target='section--about'],
+body[data-current='section--contact'] li[data-target='section--contact'] {
+    width: 100%;
+    flex-shrink: 1;
+
+    a {
+        color: var(--color-foreground);
+    }
 }
 
 #section--main {
@@ -136,19 +296,18 @@ h3 {
     width: 100%;
 
     &:not(#section--main):not(:last-child) {
-        border-bottom: 1px solid var(--foreground);
+        border-bottom: 1px solid var(--color-foreground);
     }
 }
 
 .work-card {
-    --transition-time: 500ms;
-
+    --offset: 2rem;
     position: relative;
 
-    color: var(--foreground);
+    color: var(--color-foreground);
     text-decoration: none;
     z-index: 1;
-    margin-top: 4rem;
+    margin-top: calc(var(--offset) * 2);
     width: 100%;
 
     .arrow {
@@ -159,56 +318,78 @@ h3 {
         aspect-ratio: 1/1;
         display: block;
         transform: rotate(-45deg);
-        fill: var(--background);
+        fill: var(--color-background);
         z-index: 10;
+        transition: fill var(--transition-time) ease;
     }
 
-    figcaption {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-        transition: clip-path var(--transition-time) ease;
-        transition-delay: 10ms;
+    // reset value inherited from default a
+    &::after {
+        display: none;
     }
 
-    .mock {
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: block;
-        height: 100%;
-        width: 100%;
-
-        color: var(--background);
-        clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
-        transition: clip-path var(--transition-time) ease;
-        transition-delay: 10ms;
-    }
-
+    // creates green background on hover
     &::before {
         content: '';
         position: absolute;
-        top: -2rem;
-        left: -2rem;
+
+        top: calc(var(--offset) * -1);
+        left: calc(var(--offset) * -1);
         display: block;
-        height: calc(100% + 4rem);
+        height: calc(100% + var(--offset) * 2);
         width: 0;
+
         transition: width var(--transition-time) ease;
-        background: var(--color-green);
+        background: var(--color-accent);
         z-index: -1;
+    }
+
+    // elements within the work card that have this tag have their content triplicated in the before and after pseudo elements
+    // these elements are used to accomplish the
+    [data-content] {
+        position: relative;
+        display: block;
+        width: 100%;
+        color: transparent;
+
+        &::before,
+        &::after {
+            content: attr(data-content);
+            display: block;
+            width: calc(100% + var(--offset) * 2);
+            position: absolute;
+            top: 0;
+            left: calc(var(--offset) * -1);
+            padding-inline: var(--offset);
+            transition: clip-path var(--transition-time) ease;
+        }
+
+        &::before {
+            color: var(--color-foreground);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        &::after {
+            color: var(--color-background);
+            clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+        }
     }
 
     &:hover,
     &:focus {
-        figcaption {
-            clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
-        }
+        [data-content] {
+            &::before {
+                clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+            }
 
-        .mock {
-            color: var(--background);
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            &::after {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            }
         }
 
         &::before {
-            width: calc(100% + 4rem);
+            left: calc(var(--offset) * -1);
+            width: calc(100% + var(--offset) * 2);
         }
     }
 }
@@ -220,84 +401,6 @@ h3 {
     height: 1px;
     width: 1px;
     opacity: 0.001;
-}
-
-a {
-    color: var(--color-light-green);
-}
-
-hr {
-    color: var(--foreground);
-    width: 100%;
-    margin-block: 2rem;
-}
-
-nav {
-    order: 2;
-    height: var(--header-height);
-    display: block;
-    position: sticky;
-    top: 0;
-    border-top: 1px solid var(--foreground);
-    border-bottom: 1px solid var(--foreground);
-    background: inherit;
-    z-index: 3;
-
-    & > menu {
-        display: flex;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        background: inherit;
-
-        flex-direction: row;
-        list-style: none;
-        align-items: center;
-        align-content: center;
-
-        position: relative;
-        overflow: hidden;
-
-        &::after {
-            position: absolute;
-            left: var(--base-width);
-            top: calc(1rem - 2px);
-            height: 100%;
-            content: '...................................................................................................................................................................................................';
-        }
-
-        & > li {
-            margin: 0;
-            padding: 0;
-            width: var(--base-width);
-            transition: margin 384ms ease;
-            position: relative;
-            display: inline-block;
-            flex-shrink: 0;
-            background: inherit;
-            z-index: 2;
-            overflow: hidden;
-
-            &:not(:last-child) {
-                width: calc(var(--base-width) + 1rem);
-            }
-
-            a {
-                color: var(--foreground);
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-        }
-    }
-}
-
-body[data-current='section--main'] li[data-target='section--main'],
-body[data-current='section--work'] li[data-target='section--work'],
-body[data-current='section--about'] li[data-target='section--about'],
-body[data-current='section--contact'] li[data-target='section--contact'] {
-    width: var(--base-width);
-    margin-right: auto;
-    flex-shrink: 1;
 }
 
 #vis-mode {
@@ -314,6 +417,7 @@ body[data-current='section--contact'] li[data-target='section--contact'] {
     border: 0;
 
     z-index: 99;
+    transition: fill var(--transition-time) ease;
 
     span,
     svg {
@@ -325,13 +429,7 @@ body[data-current='section--contact'] li[data-target='section--contact'] {
         width: 100%;
     }
 
-    .light {
-        fill: var(--color-white);
-    }
-
-    .dark {
-        fill: var(--white-black);
-    }
+    fill: var(--color-foreground);
 }
 
 main {
