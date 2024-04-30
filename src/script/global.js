@@ -1,4 +1,48 @@
 window.addEventListener('DOMContentLoaded', () => {
+    const titleEl = document.querySelector('title')
+    const originalTitle = titleEl.innerText
+
+    let currentTitle = 0
+    const waitTime = 10000
+    const rand = Math.floor(Math.random() * 56323)
+    const titles = [
+        'Achievement Unlocked: Been here 30 seconds!',
+        '...',
+        'Thanks for liking my content so much. Plan on being here long?',
+        '...',
+        '...',
+        '...',
+        '90 seconds closer to being just best pals... just the best pals',
+        '...',
+        '...',
+        'Two minutes? No one has that kind of attention span.',
+        '...',
+        "Yeah, you've definitely forgotten about me.",
+        '...',
+        'ENGAGING CRYPTO MINING MODE.',
+        '...',
+        `MINING CRYPTO ON YOUR MACHINE: SUCCESSFULLY MINED ${rand} LYNCHCOIN`,
+        '...',
+        "Just jokin'. Lynchcoin doesn't exist but I wish it did!",
+        '...',
+        '...',
+        'Anyway, back to your regularly scheduled programming.',
+        '...',
+    ]
+
+    setTimeout(() => {
+        const i = setInterval(() => {
+            if (!titles[currentTitle]) {
+                titleEl.innerText = originalTitle
+                clearInterval(i)
+                return
+            }
+
+            titleEl.innerText = titles[currentTitle]
+            currentTitle++
+        }, waitTime)
+    }, 20000)
+
     const navEls = document.querySelectorAll('nav li')
     const visMode = document.querySelector('#vis-mode')
 
