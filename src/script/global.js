@@ -1,4 +1,10 @@
 window.addEventListener('DOMContentLoaded', () => {
+    const inlineLinks = document.querySelectorAll('p a')
+
+    inlineLinks.forEach((l) => {
+        l.dataset.content = l.innerText
+    })
+
     const navEls = document.querySelectorAll('nav li')
     const visMode = document.querySelector('#vis-mode')
 

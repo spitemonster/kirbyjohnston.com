@@ -56,7 +56,7 @@ h6 {
         var(--container-min-padding),
         calc((100vw - var(--container-width)) / 2)
     );
-    --transition-time: 360ms;
+    --transition-time: 5000ms;
 
     font-size: var(--font-size-base);
 
@@ -124,7 +124,8 @@ main {
 
 h1,
 h2,
-h3 {
+h3,
+strong {
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 400;
     line-height: 1.2;
@@ -161,43 +162,65 @@ h3 + h3 {
 }
 
 // probably overkill and unnecessary
-a {
+a:not(.work-card):not(nav a) {
     color: var(--color-accent);
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: calc(0.5rem - 1px);
+    text-decoration-color: var(--color-accent);
     position: relative;
     display: inline-block;
     transition: color var(--transition-time) ease;
     z-index: 1;
+    font-family: 'IBM Plex Mono', monospace;
 
     &::before,
     &::after {
-        content: '';
+        display: block;
         position: absolute;
-        bottom: 0;
-        right: 0;
-        background: var(--color-accent);
-        z-index: -1;
     }
 
     &::before {
+        content: '';
         width: 0;
         height: 100%;
+        bottom: 0;
+        right: 0;
+        z-index: -2;
+        background: var(--color-accent);
         transition: width var(--transition-time) ease;
     }
 
     &::after {
-        height: 1px;
+        content: attr(data-content);
+        color: var(--color-background);
+        font-family: 'IBM Plex Mono', monospace;
+        font-weight: bold;
+        font-size: inherit;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        display: block;
+        height: 100%;
         width: 100%;
+        z-index: 0;
+        display: none;
+        /* opacity: 0; */
     }
 
     &:hover,
     &:focus {
-        color: var(--color-background);
+        /* color: var(--color-background); */
+        text-decoration-color: var(--color-accent);
 
         &::before {
             left: 0;
             right: unset;
             width: 100%;
+        }
+
+        &::after {
+            opacity: 1;
         }
     }
 }
@@ -362,7 +385,8 @@ body[data-current='section--contact'] li[data-target='section--contact'] {
         position: absolute;
 
         top: calc(var(--offset) * -1);
-        left: calc(var(--offset) * -1);
+        right: calc(var(--offset) * -1);
+        left: unset;
         display: block;
         height: calc(100% + var(--offset) * 2);
         width: 0;
@@ -384,41 +408,59 @@ body[data-current='section--contact'] li[data-target='section--contact'] {
         &::after {
             content: attr(data-content);
             display: block;
-            width: calc(100% + var(--offset) * 2);
+            width: calc(var(--container-width) + var(--offset) * 2);
             position: absolute;
             top: 0;
             left: calc(var(--offset) * -1);
             padding-inline: var(--offset);
-            transition: clip-path var(--transition-time) ease;
+            transition: all var(--transition-time) ease;
+            animation-fill-mode: none;
+            animation: none;
         }
 
         &::before {
             color: var(--color-foreground);
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); */
+            clip-path: inset(0 0 0 100%);
         }
 
         &::after {
             color: var(--color-background);
             clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+            display: none;
+            display: none !important;
         }
     }
 
     &:hover,
     &:focus {
+        &::before {
+            left: calc(var(--offset) * -1);
+            right: unset;
+            width: calc(100% + var(--offset) * 2);
+        }
+
         [data-content] {
             &::before {
-                clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+                clip-path: inset(0 100% 0 0);
+                color: purple;
+                animation-name: test;
+                animation-duration: var(--transition-time);
+                animation-fill-mode: forwards;
+                animation-timing-function: ease;
+                transition: none;
             }
 
             &::after {
                 clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
             }
         }
+    }
+}
 
-        &::before {
-            left: calc(var(--offset) * -1);
-            width: calc(100% + var(--offset) * 2);
-        }
+@keyframes test {
+    100% {
+        clip-path: inset(0 100% 0 100%);
     }
 }
 
