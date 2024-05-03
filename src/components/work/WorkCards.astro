@@ -5,6 +5,6 @@ const work = await getCollection('work')
 ---
 { work.map(w => {
 	return (
-		<WorkCard client={w.data.client_name} platform={w.data.platform} summary={w.data.summary} url={w.data.url} />
+		<WorkCard companyName={w.data.company_name} tags={w.data.tags ?? []} duration={w.data.duration} roles={w.data.roles ?? []} summary={w.data.summary} url={w.data.url} />
 	)
 })}

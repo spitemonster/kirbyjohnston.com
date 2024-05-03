@@ -8,6 +8,16 @@
     margin: 0;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    font-style: italic;
+    background-repeat: no-repeat;
+    background-size: cover;
+    shape-margin: 1rem;
+}
+
 body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -124,10 +134,13 @@ main {
 
 h1,
 h2,
-h3 {
+h3,
+strong {
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 400;
     line-height: 1.2;
+
+    scroll-margin-top: calc(var(--header-height) + 6rem);
 }
 
 h1,
@@ -165,7 +178,19 @@ a {
     position: relative;
     display: inline-block;
     transition: color var(--transition-time) ease;
+    font-family: 'IBM Plex Mono', monospace;
     z-index: 1;
+
+    &:not(.work-card):not(nav a) {
+        svg {
+            display: inline-block;
+            max-height: 0.75rem;
+
+            path {
+                transition: fill var(--transition-time) ease;
+            }
+        }
+    }
 
     &::before,
     &::after {
@@ -192,6 +217,10 @@ a {
     &:focus {
         color: var(--color-background);
 
+        path {
+            fill: var(--color-background);
+        }
+
         &::before {
             left: 0;
             right: unset;
@@ -203,7 +232,7 @@ a {
 hr {
     color: var(--color-foreground);
     width: 100%;
-    margin-block: 2rem;
+    margin-top: 2rem;
 }
 
 nav {
@@ -216,6 +245,7 @@ nav {
     border-bottom: 1px solid var(--color-foreground);
     background: inherit;
     z-index: 3;
+    flex-shrink: 0;
 
     & > menu {
         display: flex;
@@ -235,7 +265,7 @@ nav {
         &::after {
             position: absolute;
             left: 0;
-            top: calc(1rem - 2px);
+            top: calc(100% - 2rem);
             height: 100%;
             content: '...................................................................................................................................................................................................';
         }
@@ -293,20 +323,25 @@ body[data-current='section--contact'] li[data-target='section--contact'] {
     }
 }
 
-#section--main {
-    order: 1;
-}
-
-#section--work {
+nav {
     order: 2;
 }
 
-#section--about {
+#section--main {
+    order: 1;
+    min-height: calc(100vh - var(--header-height));
+}
+
+#section--work {
     order: 3;
 }
 
-#section--contact {
+#section--about {
     order: 4;
+}
+
+#section--contact {
+    order: 5;
 }
 
 .container {
@@ -316,7 +351,7 @@ body[data-current='section--contact'] li[data-target='section--contact'] {
 .frame {
     position: relative;
     display: flex;
-    min-height: calc(100vh - var(--header-height));
+    min-height: 100vh;
     padding-block: calc(var(--header-height) + 6rem);
     flex-direction: column;
     width: 100%;
@@ -333,8 +368,12 @@ body[data-current='section--contact'] li[data-target='section--contact'] {
     color: var(--color-foreground);
     text-decoration: none;
     z-index: 1;
-    margin-top: calc(var(--offset) * 2);
+    margin-block: var(--offset);
     width: 100%;
+
+    ol {
+        list-style: none;
+    }
 
     .arrow {
         position: absolute;
@@ -461,4 +500,16 @@ body[data-current='section--contact'] li[data-target='section--contact'] {
 main {
     display: flex;
     flex-direction: column;
+    scroll-snap-type: y mandatory;
+    height: 100vh;
+    overflow: scroll;
+    scroll-behavior: smooth;
+
+    .frame {
+        scroll-snap-align: start;
+        overflow: scroll;
+        scroll-snap-stop: always;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 }

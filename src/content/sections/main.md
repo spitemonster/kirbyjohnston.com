@@ -3,8 +3,12 @@
 
 # Sup
 
-I’m Kirby Johnston, a Web and Software Engineer with almost a decade of experience working primarily with marketing agencies. In this work I’ve honed a diverse set of skills that span the full development lifecycle, from ideation through development and into launch and support. My work is driven by a practical approach to development and an obsession with understanding how things work from the bottom up.
+**The Short Version**
 
-Throughout my career I've cultivated experience and expertise in a variety of programming languages, frameworks and concepts, a flexibility which has been essential for the diverse projects to which I've been attached. As with any of my contemporaries, I carry a profound love for Javascript, its flexibility and its frameworks, primarily with Vue and Svelte on the front end and Express on the back.
+I'm Kirby. I've been a full stack developer for about as long as it's been called that, primarily with marketing and CRO agencies for clients spanning local to multinational scale and for tens to thousands of users. I love solving complex problems with practical, efficient solutions and working with diverse teams to do it.
 
-My approach and philosophy has allowed me to deliver thorough, lasting and performant solutions and build strong relationships with clients throughout a number of platforms, including Wordpress, Shopify, Vercel, Webflow and many others.
+I am also a musician, mental health advocate, aspiring absurdist and traveler. I rarely but occasionally write things.
+
+I am currently looking for work; you can see my history [below](/#work) or find ways to contact me [even further below](/#contact).
+
+[**\# The Long Version**](#about)

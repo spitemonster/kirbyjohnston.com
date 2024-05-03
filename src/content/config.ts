@@ -3,11 +3,12 @@ import { z, defineCollection } from 'astro:content'
 const workCollection = defineCollection({
     type: 'content',
     schema: z.object({
-        client_name: z.string(),
-        platform: z.string(),
+        company_name: z.string(),
+        tags: z.array(z.string()).optional(),
+        roles: z.array(z.string()).optional(),
+        duration: z.string(),
         url: z.string(),
         summary: z.string(),
-        tags: z.array(z.string()).optional(),
     }),
 })
 
