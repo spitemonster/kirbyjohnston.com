@@ -1,6 +1,7 @@
 ---
 interface Props {
 	companyName: string;
+	description: string;
 	tags: string[];
 	duration: string;
 	roles: string[];
@@ -8,12 +9,13 @@ interface Props {
 	summary: string;
 }
 
-const { companyName, tags, duration, roles, url, summary } = Astro.props;
+const { companyName, description, tags, duration, roles, url, summary } = Astro.props;
 ---
 <a class="work-card" href={url} target="_blank">
 	<figure>
 		<figcaption>
 			<h3 data-content={companyName}>{companyName}</h3>
+			<p class="description" data-content={description}>{description}</p>
 			<p data-content={duration}>{duration}</p>
 			<ol>
 				{roles.map( role => <li data-content={role}>{role}</li>)}

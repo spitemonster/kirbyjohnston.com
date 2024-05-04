@@ -61,7 +61,7 @@ h6 {
     --header-height: 3rem;
     --container-width: 50rem;
     --container-max-width: 90rem;
-    --container-min-padding: 1rem;
+    --container-min-padding: 2rem;
     --container-inline-padding: max(
         var(--container-min-padding),
         calc((100vw - var(--container-width)) / 2)
@@ -329,7 +329,7 @@ nav {
 
 #section--main {
     order: 1;
-    min-height: calc(100vh - var(--header-height));
+    min-height: calc(100dvh - var(--header-height));
 }
 
 #section--work {
@@ -351,13 +351,16 @@ nav {
 .frame {
     position: relative;
     display: flex;
-    min-height: 100vh;
-    padding-block: calc(var(--header-height) + 6rem);
+    min-height: 100dvh;
     flex-direction: column;
     width: 100%;
-
+    padding-top: calc(var(--header-height) + 4rem);
     &:not(#section--main):not(:last-child) {
         border-bottom: 1px solid var(--color-foreground);
+    }
+
+    @media (min-width: 960px) {
+        padding-block: calc(var(--header-height) + 6rem);
     }
 }
 
@@ -373,6 +376,10 @@ nav {
 
     ol {
         list-style: none;
+    }
+
+    .description {
+        font-family: 'Inter', sans-serif;
     }
 
     .arrow {
@@ -501,7 +508,7 @@ main {
     display: flex;
     flex-direction: column;
     scroll-snap-type: y mandatory;
-    height: 100vh;
+    height: 100dvh;
     overflow: scroll;
     scroll-behavior: smooth;
 
