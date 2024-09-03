@@ -119,11 +119,11 @@ body.dark {
     }
 }
 
-body.light #vis-mode .light {
+body.light .icon--vis .light {
     display: none;
 }
 
-body.dark #vis-mode .dark {
+body.dark .icon--vis .dark {
     display: none;
 }
 
@@ -181,7 +181,7 @@ a {
     font-family: 'IBM Plex Mono', monospace;
     z-index: 1;
 
-    &:not(.work-card):not(nav a):not(.controls a) {
+    &:not(.work-card):not(nav a):not(.control-bar a) {
         svg {
             display: inline-block;
             max-height: 0.75rem;
@@ -482,7 +482,7 @@ nav {
     opacity: 0.001;
 }
 
-.controls {
+.control-bar {
     position: fixed;
     bottom: 3rem;
     right: 3rem;
@@ -568,15 +568,23 @@ nav {
     }
 }
 
-#vis-mode {
+*[class^='icon--'] {
     cursor: pointer;
-    height: 3rem;
     aspect-ratio: 1;
+    width: 2.5rem;
 
-    background: transparent;
-    margin: 0;
-    padding: 0;
-    border: none;
+    &.icon--linkedin {
+    }
+
+    &.icon--vis {
+        background: transparent;
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+}
+
+.icon--linkedin {
 }
 
 main {
@@ -593,5 +601,20 @@ main {
         scroll-snap-stop: always;
         -ms-overflow-style: none;
         scrollbar-width: none;
+    }
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 2rem;
+}
+
+.img--headshot {
+    overflow: clip;
+    border-radius: 50%;
+
+    img {
+        transform: scale(1.1);
     }
 }
