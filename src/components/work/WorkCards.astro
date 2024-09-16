@@ -3,8 +3,16 @@ import { getCollection } from "astro:content"
 import WorkCard from "./WorkCard.astro"
 const work = await getCollection('work')
 ---
-{ work.map(w => {
-	return (
-		<WorkCard companyName={w.data.company_name} description={w.data.description} tags={w.data.tags ?? []} duration={w.data.duration} roles={w.data.roles ?? []} summary={w.data.summary} url={w.data.url} />
-	)
-})}
+<h3>Employers:</h3>
+<div id="work-cards">
+	<ol>		
+		<!-- should be CollectionEntry type but don't know how to annotate it -->
+		{ work.map((w: any) => {
+			return (
+				<li>
+					<WorkCard work={w} />
+				</li>
+			)
+		})}
+	</ol>
+</div>

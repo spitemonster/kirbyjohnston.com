@@ -1,12 +1,40 @@
 ---
-
+import ControlBar from '../components/ControlBar.astro'
 ---
 
 <nav class="container">
     <menu>
-        <li data-target="section--main" class="active"><a href="#sup">@</a></li>
+        <li data-target="section--intro" class="active">
+			<a href="#sup">
+				@
+				<span class="visually-hidden">Intro</span>
+			</a>
+		</li>
 		<li data-target="section--work"><a href="#work">Work</a></li>
         <li data-target="section--about"><a href="#about">About</a></li>
         <li data-target="section--contact"><a href="#contact">Contact</a></li>
     </menu>
+	<ControlBar/>
 </nav>
+
+<script>
+	if (window.innerWidth <= window.fontSize() * 60) {
+		// close nav when user clicks a link on mobile
+		document.querySelectorAll('nav a').forEach(l => {
+			l.addEventListener('click', () => {
+				document.documentElement.classList.remove('mobile-nav-open');
+			});
+		});
+	} else {
+		// setup intersection observer to highlight current page in navigation
+		const navEls = document.querySelectorAll('nav li')
+		
+		// set base width property for each nav element; used for animations
+		navEls.forEach((l) => {
+			const el = l as HTMLLIElement;
+
+			const w = `${el.offsetWidth}px`
+			el.style.setProperty('--base-width', w)
+		})
+	}
+</script>

@@ -8,8 +8,9 @@ import "../style/global.css"
 import '@fontsource/ibm-plex-mono/100.css';
 import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/700.css';
-import '@fontsource/inter/200.css';
-import ControlBar from "../components/ControlBar.astro";
+import '@fontsource/inter/300.css';
+
+import MenuToggle from "../components/MenuToggle.astro";
 ---
 
 <!doctype html>
@@ -22,13 +23,11 @@ import ControlBar from "../components/ControlBar.astro";
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💀</text></svg>">
         <title>{title}</title>
     </head>
-    <body class="dark">
-		<ControlBar/>
-		
+    <body class="light">
+		<MenuToggle />
 		<main>
 			<slot />
 		</main>
-        
     </body>
     <script>
 		import "../script/global.js"

@@ -1,0 +1,19 @@
+---
+import CloseIcon from "../icons/icon--close.svg?raw";
+import MenuIcon from "../icons/icon--menu.svg?raw";
+---
+<button id="mobile-menu-toggle">
+	<span class="open">
+		<Fragment set:html={MenuIcon} />
+	</span>
+	<span class="close">
+		<Fragment set:html={CloseIcon} />
+	</span>
+	<span class="visually-hidden">Toggle mobile menu</span>
+</button>
+
+<script>
+	document.querySelector('#mobile-menu-toggle')?.addEventListener('click', () => {
+        document.documentElement.classList.toggle('mobile-nav-open')
+    })
+</script>

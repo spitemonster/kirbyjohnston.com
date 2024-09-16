@@ -2,6 +2,7 @@
 import { getEntry } from "astro:content";
 import Frame from "../../layouts/Frame.astro";
 import WorkCards from "./WorkCards.astro";
+import ClientLogos from "./ClientLogos.astro";
 
 const work = await getEntry('sections', 'work');
 const { Content } = await work.render();
@@ -11,4 +12,6 @@ const { Content } = await work.render();
 	<Content/>
 	<hr>
 	<WorkCards />
+	<hr>
+	<ClientLogos />
 </Frame>

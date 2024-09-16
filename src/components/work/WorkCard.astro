@@ -1,43 +1,56 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 interface Props {
-	companyName: string;
-	description: string;
-	tags: string[];
-	duration: string;
-	roles: string[];
-	url: string;
-	summary: string;
+	work: CollectionEntry<'work'>
 }
 
-const { companyName, description, tags, duration, roles, url, summary } = Astro.props;
+const { work } = Astro.props;
+const { company_name, description, duration, roles, summary, url} = work.data;
+
+import ArrowIcon from "../../icons/icon--arrow.svg?raw";
 ---
-<a class="work-card" href={url} target="_blank">
-	<figure>
-		<figcaption>
-			<h3 data-content={companyName}>{companyName}</h3>
-			<p class="description" data-content={description}>{description}</p>
-			<p data-content={duration}>{duration}</p>
-			<ol>
-				{roles.map( role => <li data-content={role}>{role}</li>)}
-			</ol>
-			<!-- <p data-content={tags.map((tag, i, arr) => {
-				let follow = ""
-				if (i < arr.length - 1) {
-					follow = " | "
-				}
-				return `${tag + follow}`
-			})}>
-				{tags.map((tag, i, arr) => {
-					let follow = ""
-					if (i < arr.length - 1) {
-						follow = " | "
-					}
-					return <span>{tag + follow}</span>
-				})}
-			</p> -->
-		</figcaption>
-	</figure>
-	<div class="arrow">
-		<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
+<details class="work-card">
+	<summary>
+		<h4 data-content={company_name}>{company_name}</h4>
+		<div class="work-card__links">
+				<a data-content={"visit the " + company_name + " site"} href={url} target="_blank">visit the {company_name} site</a>
+			</div>
+			<p class="work-card__description" data-content={description}>{description}</p>
+			<p class="work-card__duration" data-content={duration}>{duration}</p>
+			{roles != null &&
+			<ol class="work-card__roles">
+				{roles.map( (role: string) => <li data-content={role}>{role}</li>)}
+			</ol>}
+			<div class="arrow">
+				<Fragment set:html={ArrowIcon} />
+			</div>
+	</summary>
+	<div class="work-card__content">
+		<p data-content={summary}>{summary}</p>
 	</div>
-</a>
+</details>
+
+<script>
+	const workCards = document.querySelectorAll('.work-card');
+	workCards.forEach((c: any) => {
+        c.addEventListener('click', (e: Event) => {
+            // allow links to be clickable without toggling the accordion
+			const t: HTMLDetailsElement = e.target as HTMLDetailsElement;
+            if (t.tagName.toLowerCase() == 'a') {
+                return
+            }
+
+            e.preventDefault()
+
+            if (c.hasAttribute('open')) {
+                return c.removeAttribute('open')
+            }
+
+            workCards.forEach((w) => {
+                w.removeAttribute('open')
+            })
+
+            c.setAttribute('open', 'true')
+        })
+    })
+</script>

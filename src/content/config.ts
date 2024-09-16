@@ -13,11 +13,25 @@ const workCollection = defineCollection({
     }),
 })
 
+const clientCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        client_name: z.string(),
+        description: z.string(),
+        tags: z.array(z.string()).optional(),
+        url: z.string(),
+        logo: z.string(),
+        logo_alt: z.string(),
+        summary: z.string(),
+    }),
+})
+
 const sectionCollection = defineCollection({
     type: 'content',
 })
 
 export const collections = {
     work: workCollection,
+    clients: clientCollection,
     sections: sectionCollection,
 }

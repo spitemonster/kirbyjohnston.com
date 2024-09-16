@@ -1,53 +1,11 @@
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-* {
-    margin: 0;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    vertical-align: middle;
-    font-style: italic;
-    background-repeat: no-repeat;
-    background-size: cover;
-    shape-margin: 1rem;
-}
-
-body {
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-}
-
-img,
-picture,
-video,
-canvas,
-svg {
-    display: block;
-    max-width: 100%;
-}
-
-input,
-button,
-textarea,
-select {
-    font: inherit;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    overflow-wrap: break-word;
-}
+@import 'reset.css';
+@import 'type.css';
+@import 'utils.css';
+@import 'components/nav.css';
+@import 'components/control-bar.css';
+@import 'components/work-card.css';
+@import 'components/client-logos.css';
+@import 'components/headshot.css';
 
 :root {
     --font-size-base: 16px;
@@ -57,9 +15,9 @@ h6 {
     --color-gray-light: #bdbbb7;
     --color-dark-blue: #373f58;
     --color-green: #307351;
-    --color-light-green: #56b35f;
+    --color-green-light: #56b35f;
     --header-height: 3rem;
-    --container-width: 50rem;
+    --container-width: 60rem;
     --container-max-width: 90rem;
     --container-min-padding: 2rem;
     --container-inline-padding: max(
@@ -67,24 +25,42 @@ h6 {
         calc((100vw - var(--container-width)) / 2)
     );
     --transition-time: 360ms;
-
-    font-size: var(--font-size-base);
+    --font-mono: 'IBM Plex Mono', monospace;
+    --font-sans: 'Inter', sans-serif;
+    --font-size-xl: 2.5em;
+    --font-size-lg: 1.842em;
+    --font-size-md: 1.25em;
+    --font-size-base: 1em;
+    --font-size-sm: 0.75em;
 
     scroll-behavior: smooth;
 }
 
-::selection,
-::-moz-selection {
-    background: var(--color-accent);
-    color: var(--color-background);
-}
-
 body {
-    font-family: 'Inter', sans-serif;
+    --color-background: var(--color-white);
+    --color-foreground: var(--color-black);
+    --color-accent: var(--color-green);
+    --color-ob: var(--color-gray-light);
+    --transition-time: 0;
+
+    font-family: var(--font-sans);
     background: var(--color-background);
     color: var(--color-foreground);
-    font-size: 1.25em;
-    transition: all var(--transition-time) ease;
+    /* font-size: 1.25em; */
+    font-size: clamp(1.13rem, 0.34vi + 1.04rem, 1.31rem);
+
+    transition: color var(--transition-time) ease,
+        background var(--transition-time) ease;
+
+    &.initialized {
+        --transition-time: 360ms;
+    }
+}
+
+@media (min-width: 60rem) {
+    .fluid {
+        font-size: 1.5em;
+    }
 }
 
 body.light {
@@ -92,12 +68,14 @@ body.light {
     --color-foreground: var(--color-black);
     --color-accent: var(--color-green);
     --color-ob: var(--color-gray-light);
+
+    font-weight: 400;
 }
 
 body.dark {
     --color-background: var(--color-black);
     --color-foreground: var(--color-white);
-    --color-accent: var(--color-light-green);
+    --color-accent: var(--color-green-light);
     --color-ob: var(--color-gray-dark);
 }
 
@@ -105,17 +83,17 @@ body.dark {
     body {
         --color-background: var(--color-black);
         --color-foreground: var(--color-white);
-        --color-accent: var(--color-light-green);
+        --color-accent: var(--color-green-light);
         --color-ob: var(--color-gray-dark);
     }
 }
 
 @media (prefers-color-scheme: light) {
     body {
-        --color-background: var(--color-black);
-        --color-foreground: var(--color-white);
-        --color-accent: var(--color-light-green);
-        --color-ob: var(--color-gray-dark);
+        --color-background: var(--color-white);
+        --color-foreground: var(--color-black);
+        --color-accent: var(--color-green);
+        --color-ob: var(--color-gray-light);
     }
 }
 
@@ -130,211 +108,66 @@ body.dark .icon--vis .dark {
 main {
     background: inherit;
     color: inherit;
-}
-
-h1,
-h2,
-h3,
-strong {
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 400;
-    line-height: 1.2;
-
-    scroll-margin-top: calc(var(--header-height) + 6rem);
-}
-
-h1,
-h2 {
-    font-size: 2.5em;
-}
-
-h3 {
-    font-size: 1.842em;
-}
-
-p + p,
-p + h1,
-p + h2,
-p + h3,
-h1 + p,
-h1 + h1,
-h1 + h2,
-h1 + h3,
-h2 + p,
-h2 + h1,
-h2 + h2,
-h2 + h3,
-h3 + p,
-h3 + h1,
-h3 + h3,
-h3 + h3 {
-    margin-top: 1rem;
-}
-
-// probably overkill and unnecessary
-a {
-    color: var(--color-accent);
-    text-decoration: none;
-    position: relative;
-    display: inline-block;
-    transition: color var(--transition-time) ease;
-    font-family: 'IBM Plex Mono', monospace;
-    z-index: 1;
-
-    &:not(.work-card):not(nav a):not(.control-bar a) {
-        svg {
-            display: inline-block;
-            max-height: 0.75rem;
-
-            path {
-                transition: fill var(--transition-time) ease;
-            }
-        }
-    }
-
-    &::before,
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        background: var(--color-accent);
-        z-index: -1;
-    }
-
-    &::before {
-        width: 0;
-        height: 100%;
-        transition: width var(--transition-time) ease;
-    }
-
-    &::after {
-        height: 1px;
-        width: 100%;
-    }
-
-    &:hover,
-    &:focus {
-        color: var(--color-background);
-
-        path {
-            fill: var(--color-background);
-        }
-
-        &::before {
-            left: 0;
-            right: unset;
-            width: 100%;
-        }
-    }
+    display: flex;
+    flex-direction: column;
 }
 
 hr {
     color: var(--color-foreground);
     width: 100%;
-    margin-top: 2rem;
+    margin-block: 2rem;
 }
 
-nav {
-    order: 2;
-    height: var(--header-height);
-    display: block;
-    position: sticky;
-    top: 0;
-    border-top: 1px solid var(--color-foreground);
-    border-bottom: 1px solid var(--color-foreground);
-    background: inherit;
-    z-index: 3;
-    flex-shrink: 0;
+::selection,
+strong {
+    background: var(--color-accent);
+    color: var(--color-background);
+    transition: background var(--transition-time) ease,
+        color var(--transition-time) ease;
+}
 
-    & > menu {
-        display: flex;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        background: inherit;
+strong::selection {
+    background: var(--color-foreground);
+    color: var(--color-background);
+}
 
-        flex-direction: row;
-        list-style: none;
-        align-items: center;
-        align-content: center;
+.frame {
+    position: relative;
+    min-height: 100dvh;
+    padding-top: calc(var(--header-height) + 4rem);
 
-        position: relative;
-        overflow: hidden;
-
-        &::after {
-            position: absolute;
-            left: 0;
-            top: calc(100% - 2rem);
-            height: 100%;
-            content: '...................................................................................................................................................................................................';
+    @media (min-width: 60rem) {
+        padding-block: calc(var(--header-height) + 6rem);
+        &:not(#section--intro):not(:last-child) {
+            border-bottom: 2px solid var(--color-foreground);
         }
+    }
 
-        & > li {
-            margin: 0;
-            padding: 0;
-            width: var(--base-width);
-            transition: width var(--transition-time) ease;
-            position: relative;
-            display: inline-block;
-            flex-shrink: 0;
-            background: transparent;
-            z-index: 2;
-            overflow: hidden;
-            height: 100%;
+    @media (max-width: 60rem) {
+        padding-block: 2.5rem;
 
-            a {
-                @media (prefers-contrast: no-preference) or (prefers-contrast: less) {
-                    color: var(--color-ob);
-                }
-
-                @media (prefers-contrast: more) {
-                    color: var(--color-foreground);
-                }
-
-                background: var(--color-background);
-                text-decoration: none;
-                text-transform: uppercase;
-                height: 100%;
-                width: var(--base-width);
-                display: inline-flex;
-                align-items: center;
-                justify-content: flex-start;
-                transition: all var(--transition-time) ease;
-
-                &::before,
-                &::after {
-                    display: none;
-                }
-            }
-
-            &:hover,
-            &:focus-within {
-                a {
-                    color: var(--color-foreground);
-                }
-            }
+        &:not(:last-child) {
+            border-bottom: 2px solid var(--color-foreground);
         }
     }
 }
 
-body[data-current='section--main'] li[data-target='section--main'],
-body[data-current='section--work'] li[data-target='section--work'],
-body[data-current='section--about'] li[data-target='section--about'],
-body[data-current='section--contact'] li[data-target='section--contact'] {
-    width: 100%;
-    flex-shrink: 1;
+.intro {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 2rem;
 
-    a {
-        color: var(--color-foreground);
+    @media (max-width: 60rem) {
+        grid-template-columns: 1fr;
     }
 }
 
+// layout positioning
 nav {
     order: 2;
 }
 
-#section--main {
+#section--intro {
     order: 1;
     min-height: calc(100dvh - var(--header-height));
 }
@@ -349,272 +182,4 @@ nav {
 
 #section--contact {
     order: 5;
-}
-
-.container {
-    padding-inline: var(--container-inline-padding);
-}
-
-.frame {
-    position: relative;
-    display: flex;
-    min-height: 100dvh;
-    flex-direction: column;
-    width: 100%;
-    padding-top: calc(var(--header-height) + 4rem);
-    &:not(#section--main):not(:last-child) {
-        border-bottom: 1px solid var(--color-foreground);
-    }
-
-    @media (min-width: 960px) {
-        padding-block: calc(var(--header-height) + 6rem);
-    }
-}
-
-.work-card {
-    --offset: 2rem;
-    position: relative;
-
-    color: var(--color-foreground);
-    text-decoration: none;
-    z-index: 1;
-    margin-block: var(--offset);
-    width: 100%;
-
-    ol {
-        list-style: none;
-    }
-
-    .description {
-        font-family: 'Inter', sans-serif;
-    }
-
-    .arrow {
-        position: absolute;
-        top: -1rem;
-        right: -1rem;
-        height: 4rem;
-        aspect-ratio: 1/1;
-        display: block;
-        transform: rotate(-45deg);
-        fill: var(--color-background);
-        z-index: 10;
-        transition: fill var(--transition-time) ease;
-    }
-
-    // reset value inherited from default a
-    &::after {
-        display: none;
-    }
-
-    // creates green background on hover
-    &::before {
-        content: '';
-        position: absolute;
-
-        top: calc(var(--offset) * -1);
-        left: calc(var(--offset) * -1);
-        display: block;
-        height: calc(100% + var(--offset) * 2);
-        width: 0;
-
-        transition: width var(--transition-time) ease;
-        background: var(--color-accent);
-        z-index: -1;
-    }
-
-    // elements within the work card that have this tag have their content triplicated in the before and after pseudo elements
-    // these elements are used to accomplish the
-    [data-content] {
-        position: relative;
-        display: block;
-        width: 100%;
-        color: transparent;
-
-        &::before,
-        &::after {
-            content: attr(data-content);
-            display: block;
-            width: calc(100% + var(--offset) * 2);
-            position: absolute;
-            top: 0;
-            left: calc(var(--offset) * -1);
-            padding-inline: var(--offset);
-            transition: clip-path var(--transition-time) ease;
-        }
-
-        &::before {
-            color: var(--color-foreground);
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-        }
-
-        &::after {
-            color: var(--color-background);
-            clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-        }
-    }
-
-    &:hover,
-    &:focus {
-        [data-content] {
-            &::before {
-                clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
-            }
-
-            &::after {
-                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-            }
-        }
-
-        &::before {
-            left: calc(var(--offset) * -1);
-            width: calc(100% + var(--offset) * 2);
-        }
-    }
-}
-
-.visually-hidden {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-    height: 1px;
-    width: 1px;
-    opacity: 0.001;
-}
-
-.control-bar {
-    position: fixed;
-    bottom: 3rem;
-    right: 3rem;
-    z-index: 99;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    @media (prefers-contrast: no-preference) or (prefers-contrast: less) {
-        a,
-        svg,
-        path {
-            color: var(--color-ob);
-            fill: var(--color-ob);
-        }
-    }
-
-    &,
-    button,
-    a,
-    svg,
-    path {
-        transition: all var(--transition-time) ease;
-    }
-
-    &:hover,
-    &:focus-within {
-        a,
-        svg,
-        path {
-            color: var(--color-foreground);
-            fill: var(--color-foreground);
-        }
-    }
-
-    button,
-    a {
-        position: relative;
-        display: block;
-        height: 3rem;
-        aspect-ratio: 1;
-        background: transparent;
-        margin: 0;
-        padding: 0;
-        border: none;
-
-        &:hover,
-        &:focus {
-            color: var(--color-accent);
-            fill: var(--color-accent);
-
-            path {
-                fill: var(--color-accent);
-            }
-        }
-
-        span:not(.visually-hidden),
-        svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: block;
-            height: 100%;
-            width: 100%;
-        }
-    }
-
-    a {
-        &::before,
-        &::after {
-            display: none;
-        }
-    }
-
-    @media (max-width: 640px) {
-        bottom: 1rem;
-        right: 1rem;
-
-        button,
-        a {
-            height: 2rem;
-        }
-    }
-}
-
-*[class^='icon--'] {
-    cursor: pointer;
-    aspect-ratio: 1;
-    width: 2.5rem;
-
-    &.icon--linkedin {
-    }
-
-    &.icon--vis {
-        background: transparent;
-        margin: 0;
-        padding: 0;
-        border: none;
-    }
-}
-
-.icon--linkedin {
-}
-
-main {
-    display: flex;
-    flex-direction: column;
-    scroll-snap-type: y mandatory;
-    height: 100dvh;
-    overflow: scroll;
-    scroll-behavior: smooth;
-
-    .frame {
-        scroll-snap-align: start;
-        overflow: scroll;
-        scroll-snap-stop: always;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-}
-
-.main {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-gap: 2rem;
-}
-
-.img--headshot {
-    overflow: clip;
-    border-radius: 50%;
-
-    img {
-        transform: scale(1.1);
-    }
 }
