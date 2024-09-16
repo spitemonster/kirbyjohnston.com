@@ -23,7 +23,7 @@ nav {
             padding: 0;
             position: relative;
             display: inline-block;
-            flex-shrink: 0;
+            flex-shrink: 1;
             background: transparent;
             z-index: 2;
             overflow: clip;
@@ -51,6 +51,16 @@ nav {
                 }
             }
         }
+    }
+}
+
+body[data-current='section--intro'] nav li[data-target='section--intro'],
+body[data-current='section--work'] nav li[data-target='section--work'],
+body[data-current='section--about'] nav li[data-target='section--about'],
+body[data-current='section--contact'] nav li[data-target='section--contact'] {
+    width: 100%;
+    a {
+        color: var(--color-foreground);
     }
 }
 

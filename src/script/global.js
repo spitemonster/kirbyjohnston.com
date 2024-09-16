@@ -58,6 +58,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let observer = new IntersectionObserver(
         (entries) => {
             entries.forEach((e) => {
+                console.log(e)
                 if (e.isIntersecting) {
                     document.body.dataset.current = e.target.id
                 }
@@ -69,6 +70,7 @@ window.addEventListener('DOMContentLoaded', () => {
     )
 
     document.querySelectorAll('.frame').forEach((f) => {
+        console.log(f)
         observer.observe(f)
     })
 

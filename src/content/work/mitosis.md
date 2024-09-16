@@ -5,5 +5,5 @@ tags: [wordpress, shopify, php, laravel, vue, react]
 duration: '2017–2021'
 roles: [full stack developer]
 url: https://mitosiscreative.com
-summary: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis molestiae, ducimus nihil laudantium obcaecati deleniti iste assumenda dolores doloremque quod eligendi quam placeat hic voluptatibus reprehenderit quaerat incidunt eum omnis! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis molestiae, ducimus nihil laudantium obcaecati deleniti iste assumenda dolores doloremque quod eligendi quam placeat hic voluptatibus reprehenderit quaerat incidunt eum omnis!'
+summary: "I hope I've established now both that a) I'm actually aware I've not filled these content areas out and b) that I've got a sense of humor."
 ---

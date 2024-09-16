@@ -5,5 +5,5 @@ tags: [shopify, liquid, javascript, vwo, a/b testing]
 duration: '2021'
 roles: [web developer / test implementer]
 url: https://frictionless-commerce.com
-summary: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis molestiae, ducimus nihil laudantium obcaecati deleniti iste assumenda dolores doloremque quod eligendi quam placeat hic voluptatibus reprehenderit quaerat incidunt eum omnis! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis molestiae, ducimus nihil laudantium obcaecati deleniti iste assumenda dolores doloremque quod eligendi quam placeat hic voluptatibus reprehenderit quaerat incidunt eum omnis!'
+summary: "Oh gosh I guess I haven't figured out what I'm going to do with these content areas. Sorry about this, y'all"
 ---
