@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content"
+
+import WorkCard from "../../../WorkCard/WorkCard.astro"
+import type { LinkData } from "../../../WorkCard/WorkCard.astro"
+
+const projects = await getCollection('projects')
+---
+
+<accordion-group id="projects">
+	<h3>Projects:</h3>
+	<div class="work-cards">
+		<ul>
+			{projects.map((p: any) => {
+				const links: LinkData[] = [];
+
+				if (p.data.github != "") {
+					links.push({
+						url: p.data.github,
+						title: "github"
+					})
+				}
+
+				if (p.data.url != "") {
+					links.push({
+						url: p.data.url,
+						title: "website"
+					})
+				}
+
+				return (
+					<li>
+						<WorkCard 
+							title={p.data.project_name}
+							links={links}
+							summary={p.data.summary}
+							description={p.data.description}
+							tags={p.data.tags}
+							/>
+					</li>
+				)
+			})}
+		</ul>
+	</div>
+</accordion-group>

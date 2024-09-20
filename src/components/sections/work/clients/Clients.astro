@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content"
+import { Image } from "astro:assets"
+const clients = await getCollection('clients')
+
+function shuffleArray(array: Array<any>) {
+    for (var i = array.length - 1; i >= 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
+shuffleArray(clients);
+---
+<div id="clients">
+	<h3>Clients:</h3>
+	<div class="client-logos">
+		<ul>
+			{clients.map((c: any) => {
+				const { client_name, url, logo, logo_alt } = c.data
+
+				return (
+
+					<li>
+						<a class="img--client-logo" href={url} 
+							style={`--logo-url: url('${logo}');`} 
+							title={client_name} >
+							<figure>
+								<Image src={logo} alt={logo_alt} width="212" height="100" />
+								<figcaption>{client_name}</figcaption>
+							</figure>
+						</a>
+					</li>
+				)
+			})}
+		</ul>
+	</div>
+</div>

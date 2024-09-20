@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+// import EmployerCard from "./EmployerCard.astro";
+import WorkCard, { type LinkData } from "../WorkCard.astro";
+
+const work = await getCollection("work")
+---
+
+<accordion-group id="employers">
+	<h3>Employers:</h3>
+	<div class="work-cards">
+		<ol>		
+			<!-- should be CollectionEntry type but don't know how to annotate it -->
+			{ work.map((w: any) => {
+
+				const links: LinkData[] = [];
+
+				if (w.data.url != "") {
+					links.push({
+						url: w.data.url,
+						title: "site"
+					})
+				}
+
+				return (
+					<li>
+						<WorkCard 
+							title={w.data.company_name}
+							links={links}
+							summary={w.data.summary}
+							duration={w.data.duration}
+							roles={w.data.roles}
+							description={w.data.description} />
+					</li>
+				)
+			})}
+		</ol>
+	</div>
+</accordion-group>
