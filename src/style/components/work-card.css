@@ -1,7 +1,8 @@
-#work-cards {
+.work-cards {
     margin-top: 2rem;
 
-    & > ol {
+    & > ol,
+    & > ul {
         list-style: none;
         margin: 0;
         padding: 0;
@@ -28,8 +29,8 @@
     width: 100%;
 
     &:not([open]) {
-        .work-card__tags,
-        .work-card__links {
+        .tags,
+        .links {
             height: 0;
             overflow: clip;
         }
@@ -52,7 +53,15 @@
     }
 
     ol {
-        list-style: none;
+        list-style: disc;
+
+        li {
+            display: list-item !important;
+            &::marker {
+                /* transition: color var(--transition-time) ease; */
+                color: var(--color-background);
+            }
+        }
     }
 
     // elements within the work card that have this tag have their content triplicated in the before and after pseudo elements
@@ -86,18 +95,18 @@
         }
     }
 
-    .work-card__duration,
-    .work-card__roles {
+    .duration,
+    .roles {
         font-family: var(--font-mono);
     }
 
-    .work-card__content {
+    .content {
         position: relative;
         color: inherit;
         padding-top: 2rem;
     }
 
-    .work-card__technology {
+    .technology {
         list-style: none;
         padding-left: 0;
         display: inline-flex;
@@ -112,11 +121,11 @@
         }
     }
 
-    .work-card__skills {
+    .skills {
         font-family: var(--font-mono);
     }
 
-    .work-card__tags {
+    .tags {
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
@@ -140,7 +149,7 @@
         }
     }
 
-    .work-card__links {
+    .links {
         position: relative;
         z-index: 3;
         font-size: var(--font-size-sm);
@@ -214,7 +223,7 @@
         }
     }
 
-    .work-card__content {
+    .content {
         &::before,
         &::after {
             content: '';
@@ -234,7 +243,7 @@
         }
     }
 
-    .work-card__links {
+    .links {
         &::before {
             background: transparent;
         }
@@ -280,7 +289,7 @@
 
 @media (max-width: 60rem) {
     .work-card {
-        .work-card__links {
+        .links {
             a:not([data-content]) {
                 color: var(--color-accent);
             }
