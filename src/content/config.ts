@@ -34,6 +34,7 @@ const projectCollection = defineCollection({
         url: z.string(),
         github: z.string(),
         summary: z.string(),
+        description: z.string(),
     }),
 })
 
