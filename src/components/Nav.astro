@@ -49,6 +49,7 @@ import ControlBar from '../components/ControlBar.astro'
 		background: inherit;
 		z-index: 3;
 		flex-shrink: 0;
+		transition: border var(--transition-time) ease;
 
 		& > menu, & > li {
 			position: relative;
@@ -110,9 +111,21 @@ import ControlBar from '../components/ControlBar.astro'
 	}
 
 	@media (min-width: 60rem) {
+
+		body[data-current='section--intro'] {
+			nav {
+				border-top: 2px solid var(--color-foreground);
+			}
+		}
+
+		body:not([data-current='section--intro']) {
+			nav {
+				border-bottom: 2px solid var(--color-foreground);
+			}
+		}
 		nav {
-			border-top: 1px solid var(--color-foreground);
-			border-bottom: 1px solid var(--color-foreground);
+			/* border-top: 1px solid var(--color-foreground);
+			border-bottom: 1px solid var(--color-foreground); */
 
 			a {
 				@media (prefers-contrast: no-preference) or (prefers-contrast: less) {

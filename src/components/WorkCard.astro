@@ -70,6 +70,7 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
     text-decoration: none;
     z-index: 1;
     width: 100%;
+	padding-block: var(--offset);
 
     &:not([open]) {
         .tags,
@@ -222,8 +223,12 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
         text-transform: lowercase;
     }
 
+
+	.arrow, &::before, &::after {
+		position: absolute;
+	}
+
     .arrow {
-        position: absolute;
         top: calc(var(--offset) + 1px);
         right: 0;
         width: 4rem;
@@ -237,26 +242,28 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
         background: transparent;
     }
 
-    /* // reset value inherited from default a */
-    &::after {
-		all:initial;
-    }
+	&::before, &::after {
+		content: '';
+		top: 0;
+		left: calc(var(--offset) * -1);
 
-    padding-block: var(--offset);
+		display: block;
+
+		background: var(--color-accent);
+	}
+
+    &::after {
+        height: calc(var(--offset));
+        aspect-ratio: 1;
+        width: auto;
+        clip-path: polygon(100% 0%, 0 0, 0 100%);
+    }
 
     /* // creates green background on hover */
     &::before {
-        content: '';
-        position: absolute;
-
-        top: 0;
-        left: calc(var(--offset) * -1);
-        display: block;
         height: 100%;
         width: 0;
-
         transition: width var(--transition-time) ease;
-        background: var(--color-accent);
         z-index: -1;
     }
 
@@ -355,4 +362,5 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
         }
     }
 }
+
 </style>
