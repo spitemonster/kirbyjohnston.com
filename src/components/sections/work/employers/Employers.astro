@@ -10,7 +10,7 @@ const employers = await getCollection("employers")
 	<div class="work-cards">
 		<ol>		
 			<!-- should be CollectionEntry type but don't know how to annotate it -->
-			{ employers.map((employer: any) => {
+			{employers.map((employer: any) => {
 
 				const links: LinkData[] = [];
 
@@ -39,6 +39,10 @@ const employers = await getCollection("employers")
 
 <style>
 #employers {
+	h3 {
+		margin-bottom: 1rem;
+	}
+	
 	ol {
 		list-style: none;
         margin: 0;
