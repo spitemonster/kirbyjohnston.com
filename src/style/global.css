@@ -109,8 +109,11 @@ main {
 
 hr {
     color: var(--color-foreground);
+    background: var(--color-foreground);
     width: 100%;
     margin-block: 2rem;
+    height: 2px;
+    border: none;
 }
 
 ::selection,

@@ -23,13 +23,15 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
 		<h4 data-content={title}>{title}</h4>
 		{links != null && links.length > 0 &&
 			<div class="links">
-				{links.map((link: LinkData) => {
-					return (
-						<li>
-							<a data-content={`visit the ${title} ${link.title}`} href={link.url} target="_blank">visit the {title} {link.title}</a>
-						</li>
-					)
-				})}
+				<ul>
+					{links.map((link: LinkData) => {
+						return (
+							<li>
+								<a data-content={`visit the ${title} ${link.title}`} href={link.url} target="_blank">visit the {title} {link.title}</a>
+							</li>
+						)
+					})}
+				</ul>
 			</div>
 		}
 		{description != "" &&
@@ -105,6 +107,12 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
         }
     }
 
+
+    .duration,
+    .roles {
+        font-family: var(--font-mono);
+    }
+
     /* // elements within the work card that have this tag have their content triplicated in the before and after pseudo elements
     // these elements are used to accomplish the */
     [data-content] {
@@ -136,15 +144,10 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
         }
     }
 
-    .duration,
-    .roles {
-        font-family: var(--font-mono);
-    }
-
     .content {
-        position: relative;
+		position: relative;
         color: inherit;
-        padding-top: 2rem;
+        margin-top: 1rem;
     }
 
     .technology {
@@ -195,6 +198,12 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
         z-index: 3;
         font-size: var(--font-size-sm);
 
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
         a {
             width: auto;
             color: transparent;
@@ -230,15 +239,7 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
 
     /* // reset value inherited from default a */
     &::after {
-        content: '';
-        background: var(--color-accent);
-        position: absolute;
-        top: 0;
-        left: calc(var(--offset) * -1);
-        height: calc(var(--offset));
-        aspect-ratio: 1;
-        width: auto;
-        clip-path: polygon(100% 0%, 0 0, 0 100%);
+		all:initial;
     }
 
     padding-block: var(--offset);
@@ -262,26 +263,6 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
     &[open] {
         .arrow {
             transform: rotate(90deg);
-        }
-    }
-
-    .content {
-        &::before,
-        &::after {
-            content: '';
-            position: absolute;
-            top: 1rem;
-            display: block;
-            width: 100%;
-            height: 1px;
-        }
-
-        &::before {
-            background: var(--color-foreground);
-        }
-
-        &::after {
-            background: var(--color-background);
         }
     }
 
@@ -374,5 +355,4 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
         }
     }
 }
-
 </style>
