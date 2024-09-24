@@ -1,16 +1,8 @@
 ---
 import { getCollection } from "astro:content"
-import { Image } from "astro:assets"
+import ClientLogo from "./ClientLogo.astro";
 const clients = await getCollection('clients')
-
-function shuffleArray(array: Array<any>) {
-    for (var i = array.length - 1; i >= 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
+import { shuffleArray } from "@utils";
 
 shuffleArray(clients);
 ---
@@ -19,22 +11,72 @@ shuffleArray(clients);
 	<div class="client-logos">
 		<ul>
 			{clients.map((c: any) => {
-				const { client_name, url, logo, logo_alt } = c.data
+				const { client_name, url, logo, logo_alt, logo_size } = c.data
 
 				return (
 
 					<li>
-						<a class="img--client-logo" href={url} 
-							style={`--logo-url: url('${logo}');`} 
-							title={client_name} >
-							<figure>
-								<Image src={logo} alt={logo_alt} width="212" height="100" />
-								<figcaption>{client_name}</figcaption>
-							</figure>
-						</a>
+						<ClientLogo clientName={client_name} 
+							clientUrl={url}
+							logoUrl={logo}
+							logoAlt={logo_alt}
+							logoSize={logo_size} />
 					</li>
 				)
 			})}
 		</ul>
 	</div>
 </div>
+
+<style>
+	.client-logos {
+		margin-top: 2rem;
+
+		ul {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: center;
+			gap: 1rem;
+			
+			padding: 0;
+			margin: 0;
+			
+			list-style: none;
+
+			li {
+				padding: 0;
+				margin: 0;
+			}
+
+			a::after {
+				display: none;
+			}
+
+			figure {
+				position: relative;
+			}
+
+			figcaption {
+				position: absolute;
+				height: 1px;
+				width: 1px;
+				opacity: 0.001px;
+				left: -100000px;
+				top: -100000px;
+			}
+
+			img {
+				margin: 0 auto;
+				display: block;
+				max-height: 5rem;
+			}
+		}
+	}
+
+	@media (max-width: 60rem) {
+		.img--client-logo {
+			width: 100%;
+		}
+	}
+</style>

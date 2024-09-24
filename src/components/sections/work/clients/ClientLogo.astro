@@ -1,0 +1,50 @@
+---
+export interface Vector2 {
+	x: number
+	y: number
+}
+
+
+export interface Props {
+	clientUrl: string;
+	logoUrl: string;
+	logoAlt: string;
+	logoSize: Vector2;
+	clientName: string;
+}
+
+const { clientUrl, logoUrl, logoAlt, logoSize, clientName} = Astro.props;
+
+import Image from "astro/components/Image.astro";
+
+const height = 100;
+
+---
+<a class="img--client-logo" href={clientUrl} 
+	style={`--logo-url: url('${logoUrl}');`} 
+	title={clientName} >
+	<figure>
+		<Image src={logoUrl} 
+			alt={logoAlt}
+			width={`${(height / logoSize.y) * logoSize.x}`}
+			height={height}
+			style={`aspect-ratio: ${logoSize.x} / ${logoSize.y}`} />
+		<figcaption class="visually-hidden">{clientName}</figcaption>
+	</figure>
+</a>
+
+<style>
+	.img--client-logo {
+		background: var(--color-foreground);
+		mask-image: var(--logo-url);
+		mask-size: contain;
+		mask-position: center center;
+		mask-repeat: no-repeat;
+
+		max-width: 15rem;
+
+		img {
+			opacity: 0;
+		}
+	}
+</style>

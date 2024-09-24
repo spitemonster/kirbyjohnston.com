@@ -1,9 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-// import EmployerCard from "./EmployerCard.astro";
-import WorkCard, { type LinkData } from "../../../WorkCard/WorkCard.astro";
+import WorkCard, { type LinkData } from "@components/WorkCard.astro";
 
-const work = await getCollection("work")
+const employers = await getCollection("employers")
 ---
 
 <accordion-group id="employers">
@@ -11,13 +10,13 @@ const work = await getCollection("work")
 	<div class="work-cards">
 		<ol>		
 			<!-- should be CollectionEntry type but don't know how to annotate it -->
-			{ work.map((w: any) => {
+			{ employers.map((employer: any) => {
 
 				const links: LinkData[] = [];
 
-				if (w.data.url != "") {
+				if (employer.data.url != "") {
 					links.push({
-						url: w.data.url,
+						url: employer.data.url,
 						title: "site"
 					})
 				}
@@ -25,15 +24,37 @@ const work = await getCollection("work")
 				return (
 					<li>
 						<WorkCard 
-							title={w.data.company_name}
+							title={employer.data.company_name}
 							links={links}
-							summary={w.data.summary}
-							duration={w.data.duration}
-							roles={w.data.roles}
-							description={w.data.description} />
+							summary={employer.data.summary}
+							duration={employer.data.duration}
+							roles={employer.data.roles}
+							description={employer.data.description} />
 					</li>
 				)
 			})}
 		</ol>
 	</div>
 </accordion-group>
+
+<style>
+#employers {
+	ol {
+		list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: block;
+            padding: 0;
+
+            // little space between work cards
+            & + li {
+                margin-top: 2px;
+            }
+        }
+	}
+
+	margin-top: 2rem;
+}
+</style>

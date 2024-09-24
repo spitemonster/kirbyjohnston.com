@@ -1,17 +1,13 @@
 ---
 import Frame from "../../../layouts/Frame.astro";
-
-import { Image } from 'astro:assets'
+import Headshot from '@components/Headshot.astro'
 import { Content as IntroContent } from '../../../content/sections/intro.md';
-
 ---
 
 <Frame id="section--intro">
 	<section class="intro">
 		<div>
-			<figure class="img--headshot">
-				<Image src="/images/me.webp" alt="a quite handsome fella." width="212" height="212" loading="eager" />
-			</figure>
+			<Headshot />
 		</div>
 		
 		<div>

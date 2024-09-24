@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content"
 
-import WorkCard from "../../../WorkCard/WorkCard.astro"
-import type { LinkData } from "../../../WorkCard/WorkCard.astro"
+import WorkCard from "../../../WorkCard.astro"
+import type { LinkData } from "../../../WorkCard.astro"
 
 const projects = await getCollection('projects')
 ---
@@ -43,3 +43,23 @@ const projects = await getCollection('projects')
 		</ul>
 	</div>
 </accordion-group>
+
+<style>
+	accordion-group {
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+
+			li {
+				display: block;
+				padding: 0;
+
+				// little space between work cards
+				& + li {
+					margin-top: 2px;
+				}
+			}
+		}
+	}
+</style>
