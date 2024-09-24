@@ -1,6 +1,6 @@
 ---
 import { getEntry } from "astro:content";
-import Frame from "../../layouts/Frame.astro";
+import Frame from "../../../layouts/Frame.astro";
 
 const about = await getEntry('sections', 'about');
 const { Content } = await about.render();

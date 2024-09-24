@@ -1,11 +1,6 @@
 @import 'reset.css';
 @import 'type.css';
 @import 'utils.css';
-@import 'components/nav.css';
-@import 'components/control-bar.css';
-@import 'components/work-card.css';
-@import 'components/client-logos.css';
-@import 'components/headshot.css';
 
 :root {
     --font-size-base: 16px;

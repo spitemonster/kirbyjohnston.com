@@ -1,22 +1,64 @@
-#work-cards {
-    margin-top: 2rem;
-
-    & > ol {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-
-        li {
-            display: block;
-            padding: 0;
-
-            // little space between work cards
-            & + li {
-                margin-top: 2px;
-            }
-        }
-    }
+---
+export interface LinkData {
+	url: string
+	title: string
 }
+
+interface Props {
+	title: string;
+	links: LinkData[];
+	tags?: string[];
+	summary: string;
+	duration?: string;
+	roles?: string[];
+	description: string;
+}
+
+const { title, links, tags, summary, duration, roles, description } = Astro.props;
+
+import ArrowIcon from '@icons/icon--arrow.svg?raw'
+---
+<details class="work-card">
+	<summary>
+		<h4 data-content={title}>{title}</h4>
+		{links != null && links.length > 0 &&
+			<div class="links">
+				{links.map((link: LinkData) => {
+					return (
+						<li>
+							<a data-content={`visit the ${title} ${link.title}`} href={link.url} target="_blank">visit the {title} {link.title}</a>
+						</li>
+					)
+				})}
+			</div>
+		}
+		{description != "" &&
+			<p class="description" data-content={description}>{description}</p>
+		}
+		<div class="arrow">
+			<Fragment set:html={ArrowIcon} />
+		</div>
+	</summary>
+	<div class="content">
+		{duration != "" &&
+			<p class="duration" data-content={duration}>{duration}</p>
+		}
+		{roles != null &&
+			<ol class="roles">
+				{roles.map( (role: string) => <li data-content={role}>{role}</li>)}
+			</ol>}
+		{tags && tags.length > 0 &&
+			<ul class="tags">
+				{tags.map((tag: string) => <li data-content={tag}>{tag}</li>)}
+			</ul>
+		}
+		{summary != "" &&
+			<p data-content={summary}>{summary}</p>
+		}
+	</div>
+</details>
+
+<style>
 
 .work-card {
     --offset: 2rem;
@@ -28,8 +70,8 @@
     width: 100%;
 
     &:not([open]) {
-        .work-card__tags,
-        .work-card__links {
+        .tags,
+        .links {
             height: 0;
             overflow: clip;
         }
@@ -52,11 +94,19 @@
     }
 
     ol {
-        list-style: none;
+        list-style: disc;
+
+        li {
+            display: list-item !important;
+            &::marker {
+                /* transition: color var(--transition-time) ease; */
+                color: var(--color-background);
+            }
+        }
     }
 
-    // elements within the work card that have this tag have their content triplicated in the before and after pseudo elements
-    // these elements are used to accomplish the
+    /* // elements within the work card that have this tag have their content triplicated in the before and after pseudo elements
+    // these elements are used to accomplish the */
     [data-content] {
         position: relative;
         display: block;
@@ -86,18 +136,18 @@
         }
     }
 
-    .work-card__duration,
-    .work-card__roles {
+    .duration,
+    .roles {
         font-family: var(--font-mono);
     }
 
-    .work-card__content {
+    .content {
         position: relative;
         color: inherit;
         padding-top: 2rem;
     }
 
-    .work-card__technology {
+    .technology {
         list-style: none;
         padding-left: 0;
         display: inline-flex;
@@ -112,11 +162,11 @@
         }
     }
 
-    .work-card__skills {
+    .skills {
         font-family: var(--font-mono);
     }
 
-    .work-card__tags {
+    .tags {
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
@@ -140,7 +190,7 @@
         }
     }
 
-    .work-card__links {
+    .links {
         position: relative;
         z-index: 3;
         font-size: var(--font-size-sm);
@@ -160,6 +210,7 @@
 
     .description {
         font-family: 'Inter', sans-serif;
+        text-transform: lowercase;
     }
 
     .arrow {
@@ -177,7 +228,7 @@
         background: transparent;
     }
 
-    // reset value inherited from default a
+    /* // reset value inherited from default a */
     &::after {
         content: '';
         background: var(--color-accent);
@@ -192,7 +243,7 @@
 
     padding-block: var(--offset);
 
-    // creates green background on hover
+    /* // creates green background on hover */
     &::before {
         content: '';
         position: absolute;
@@ -214,7 +265,7 @@
         }
     }
 
-    .work-card__content {
+    .content {
         &::before,
         &::after {
             content: '';
@@ -234,7 +285,7 @@
         }
     }
 
-    .work-card__links {
+    .links {
         &::before {
             background: transparent;
         }
@@ -280,7 +331,7 @@
 
 @media (max-width: 60rem) {
     .work-card {
-        .work-card__links {
+        .links {
             a:not([data-content]) {
                 color: var(--color-accent);
             }
@@ -323,3 +374,5 @@
         }
     }
 }
+
+</style>

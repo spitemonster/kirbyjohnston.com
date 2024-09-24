@@ -1,6 +1,6 @@
 ---
 import { getEntry } from "astro:content";
-import Frame from "../../layouts/Frame.astro";
+import Frame from "../../../layouts/Frame.astro";
 
 const contact = await getEntry('sections', 'contact');
 const { Content } = await contact.render();

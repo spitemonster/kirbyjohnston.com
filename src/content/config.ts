@@ -1,6 +1,6 @@
 import { z, defineCollection } from 'astro:content'
 
-const workCollection = defineCollection({
+const employerCollection = defineCollection({
     type: 'content',
     schema: z.object({
         company_name: z.string(),
@@ -22,7 +22,20 @@ const clientCollection = defineCollection({
         url: z.string(),
         logo: z.string(),
         logo_alt: z.string(),
+        logo_size: z.object({ x: z.number(), y: z.number() }),
         summary: z.string(),
+    }),
+})
+
+const projectCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        project_name: z.string(),
+        tags: z.array(z.string()),
+        url: z.string(),
+        github: z.string(),
+        summary: z.string(),
+        description: z.string(),
     }),
 })
 
@@ -31,7 +44,8 @@ const sectionCollection = defineCollection({
 })
 
 export const collections = {
-    work: workCollection,
+    employers: employerCollection,
     clients: clientCollection,
+    projects: projectCollection,
     sections: sectionCollection,
 }

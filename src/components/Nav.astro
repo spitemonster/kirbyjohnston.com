@@ -27,14 +27,185 @@ import ControlBar from '../components/ControlBar.astro'
 		});
 	} else {
 		// setup intersection observer to highlight current page in navigation
-		const navEls = document.querySelectorAll('nav li')
+		const navEls: HTMLLIElement[] = Array.from(document.querySelectorAll('nav li'))
 		
 		// set base width property for each nav element; used for animations
 		navEls.forEach((l) => {
-			const el = l as HTMLLIElement;
+			const el = l;
 
 			const w = `${el.offsetWidth}px`
 			el.style.setProperty('--base-width', w)
 		})
 	}
 </script>
+
+<style is:global>
+	nav {
+		order: 2;
+		height: var(--header-height);
+		display: block;
+		position: sticky;
+		top: 0;
+		background: inherit;
+		z-index: 3;
+		flex-shrink: 0;
+
+		& > menu, & > li {
+			position: relative;
+			margin: 0;
+			padding: 0;
+			overflow: clip;
+		}
+
+		& > menu {
+			display: flex;
+			background: inherit;
+			list-style: none;
+
+			& > li {
+				display: inline-block;
+				flex-shrink: 1;
+				background: transparent;
+				z-index: 2;
+
+				a {
+					background: var(--color-background);
+					text-decoration: none;
+					height: 100%;
+					width: var(--base-width);
+					display: inline-flex;
+					align-items: center;
+					justify-content: flex-start;
+					transition: all var(--transition-time) ease;
+
+					&::before,
+					&::after {
+						display: none;
+					}
+				}
+
+				&:hover,
+				&:focus-within {
+					a {
+						color: var(--color-foreground);
+					}
+				}
+			}
+		}
+	}
+
+	body[data-current='section--intro'] nav li[data-target='section--intro'],
+	body[data-current='section--work'] nav li[data-target='section--work'],
+	body[data-current='section--about'] nav li[data-target='section--about'],
+	body[data-current='section--contact'] nav li[data-target='section--contact'] {
+		width: 100%;
+		a {
+			color: var(--color-foreground);
+		}
+	}
+
+	#mobile-menu-toggle {
+		fill: var(--color-foreground);
+		transition: fill var(--transition-time) ease;
+	}
+
+	@media (min-width: 60rem) {
+		nav {
+			border-top: 1px solid var(--color-foreground);
+			border-bottom: 1px solid var(--color-foreground);
+
+			a {
+				@media (prefers-contrast: no-preference) or (prefers-contrast: less) {
+					color: var(--color-ob);
+				}
+
+				@media (prefers-contrast: more) {
+					color: var(--color-foreground);
+				}
+			}
+
+			& > menu {
+				height: 100%;
+				flex-direction: row;
+				align-items: center;
+				align-content: center;
+
+				&::after {
+					position: absolute;
+					left: 0;
+					top: calc(100% - 2rem);
+					height: 100%;
+					content: '...................................................................................................................................................................................................';
+				}
+
+				& > li {
+					width: var(--base-width);
+					transition: width var(--transition-time) ease;
+					height: 100%;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 60rem) {
+		nav {
+			position: fixed;
+			top: 0;
+			width: 100lvw;
+			height: 100lvh;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			left: 100%;
+			transition: left var(--transition-time) ease;
+
+			a {
+				color: var(--color-foreground);
+			}
+
+			menu {
+				flex-direction: column;
+				justify-content: center;
+
+				li {
+					height: auto;
+					width: auto;
+					font-weight: bold;
+					font-size: var(--font-size-lg);
+					transition: transform var(--transition-time) ease;
+					transform: translateX(2.5rem);
+
+					&:nth-child(1) {
+						transition-delay: calc(var(--transition-time) / 4);
+					}
+
+					&:nth-child(2) {
+						transition-delay: calc(var(--transition-time) / 2);
+					}
+
+					&:nth-child(3) {
+						transition-delay: calc(var(--transition-time) * 3 / 4);
+					}
+
+					&:nth-child(4) {
+						transition-delay: var(--transition-time);
+					}
+				}
+			}
+		}
+
+		.mobile-nav-open {
+			overflow: hidden;
+			height: 100dvh;
+
+			nav {
+				left: 0;
+
+				li {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			}
+		}
+	}
+</style>
