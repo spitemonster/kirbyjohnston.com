@@ -1,0 +1,287 @@
+---
+export interface LinkData {
+	url: string
+	title: string
+}
+
+interface Props {
+	title: string;
+	links: LinkData[];
+	tags?: string[];
+	summary: string;
+	duration?: string;
+	roles?: string[];
+	description: string;
+	slug: string;
+}
+
+const { title, description, duration, slug } = Astro.props;
+
+import ArrowIcon from '@icons/icon--arrow.svg?raw'
+---
+<a href={`/projects/${slug}`} class="project-card">
+	<div>
+		<h4 data-content={title}>{title}</h4>
+		{description != "" &&
+			<p class="description" data-content={description}>{description}</p>
+		}
+		{duration != "" &&
+		<p class="duration" data-content={duration}>{duration}</p>
+	}
+		<div class="arrow">
+			{false && 
+			<svg class="red" ></svg>}
+			<Fragment set:html={ArrowIcon} />
+		</div>
+	</div>
+</a>
+
+<style is:global>
+
+
+.project-card {
+    --offset: 2rem;
+    position: relative;
+
+    color: var(--color-foreground);
+    text-decoration: none;
+    z-index: 1;
+    width: 100%;
+	padding-block: var(--offset);
+
+	.arrow svg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+	}
+
+    &:not([open]) {
+        .tags,
+        .links {
+            height: 0;
+            overflow: clip;
+        }
+    }
+
+	.arrow {
+		position: absolute;
+        top: calc(var(--offset) + 1px);
+        right: 0;
+        width: 4rem;
+        height: auto;
+        aspect-ratio: 4/3;
+        display: block;
+        transform: rotate(180deg);
+        fill: var(--color-background);
+        z-index: 10;
+        transition: all var(--transition-time) ease;
+        background: transparent;
+    }
+    summary {
+        list-style: none;
+        cursor: pointer;
+
+        h4 {
+            a {
+                color: var(--color-accent);
+                text-decoration: none;
+            }
+        }
+    }
+
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+    ol {
+        list-style: disc;
+
+        li {
+            display: list-item !important;
+            &::marker {
+                /* transition: color var(--transition-time) ease; */
+                color: var(--color-background);
+            }
+        }
+    }
+
+
+    .duration,
+    .roles {
+        font-family: var(--font-mono);
+    }
+
+    /* // elements within the work card that have this tag have their content triplicated in the before and after pseudo elements
+    // these elements are used to accomplish the */
+    [data-content] {
+        position: relative;
+        display: block;
+        width: 100%;
+        color: transparent;
+
+        &::before,
+        &::after {
+            content: attr(data-content);
+            display: block;
+            width: calc(100% + var(--offset) * 2);
+            position: absolute;
+            top: 0;
+            left: calc(var(--offset) * -1);
+            padding-inline: var(--offset);
+            transition: clip-path var(--transition-time) ease;
+        }
+
+        &::before {
+            color: var(--color-foreground);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        &::after {
+            color: var(--color-background);
+            clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+        }
+    }
+
+    .content {
+		position: relative;
+        color: inherit;
+        margin-top: 1rem;
+    }
+
+    .technology {
+        list-style: none;
+        padding-left: 0;
+        display: inline-flex;
+        justify-content: flex-start;
+        font-family: var(--font-mono);
+        gap: 0.5rem;
+
+        li {
+            width: auto;
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+    }
+
+    .skills {
+        font-family: var(--font-mono);
+    }
+
+    .description {
+        font-family: 'Inter', sans-serif;
+        text-transform: lowercase;
+    }
+
+
+	.arrow, &::before, &::after {
+		position: absolute;
+	}
+
+	&::before, &::after {
+		content: '';
+		top: 0;
+		left: calc(var(--offset) * -1);
+
+		display: block;
+
+		background: var(--color-accent);
+	}
+
+    &::after {
+        height: calc(var(--offset));
+        aspect-ratio: 1;
+        width: auto;
+        clip-path: polygon(100% 0%, 0 0, 0 100%);
+    }
+
+    /* // creates green background on hover */
+    &::before {
+        height: 100%;
+        width: 0;
+        transition: width var(--transition-time) ease;
+        z-index: -1;
+    }
+
+    &[open] {
+        .arrow {
+            transform: rotate(90deg);
+        }
+    }
+}
+
+@media (min-width: 60rem) {
+    .project-card {
+        &:hover,
+        &:focus,
+        &:focus-within {
+            summary {
+                outline: none;
+            }
+
+            [data-content] {
+                &::before {
+                    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+                }
+
+                &::after {
+                    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+                }
+            }
+
+            &::before {
+                left: calc(var(--offset) * -1);
+                width: calc(100% + var(--offset) * 2);
+            }
+        }
+    }
+}
+
+@media (max-width: 60rem) {
+    .project-card {
+        .links {
+            a:not([data-content]) {
+                color: var(--color-accent);
+            }
+        }
+
+        .arrow {
+            fill: var(--color-foreground);
+            top: 2.5rem;
+            right: 0;
+            width: 2rem;
+        }
+
+        &[open] {
+            summary {
+                outline: none;
+            }
+
+            .arrow {
+                fill: var(--color-background);
+            }
+
+            [data-content] {
+                &::before {
+                    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+                }
+
+                &::after {
+                    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+                }
+            }
+
+            .external svg {
+                fill: var(--color-background);
+            }
+
+            &::before {
+                left: calc(var(--offset) * -1);
+                width: calc(100% + var(--offset) * 2);
+            }
+        }
+    }
+}
+
+</style>

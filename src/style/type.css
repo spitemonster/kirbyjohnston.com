@@ -48,7 +48,7 @@ a {
     font-family: var(--font-mono);
     z-index: 1;
 
-    &:not(.work-card):not(nav a):not(.control-bar a) {
+    &:not(.project-card):not(nav a):not(.control-bar a) {
         svg {
             display: inline-block;
             max-height: 0.75rem;

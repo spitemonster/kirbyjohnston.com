@@ -3,7 +3,6 @@ import { getEntry } from "astro:content";
 import Frame from "../../../layouts/Frame.astro";
 import Clients from "./clients/Clients.astro";
 import Employers from "./employers/Employers.astro"
-// import Projects from './projects/Projects.astro'
 
 const work = await getEntry('sections', 'work');
 const { Content } = await work.render();
@@ -15,6 +14,6 @@ const { Content } = await work.render();
 	<Employers />
 	<hr>
 	<Clients />
-	<!-- <hr>
-	<Projects /> -->
+	<hr>
+	<a href="/projects">View some of my projects</a>
 </Frame>

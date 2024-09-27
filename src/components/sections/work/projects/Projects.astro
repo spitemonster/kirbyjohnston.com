@@ -1,14 +1,14 @@
 ---
-import { getCollection } from "astro:content"
-
-import WorkCard from "../../../WorkCard.astro"
+import { getCollection, type CollectionEntry } from "astro:content"
+import ProjectCard from "../../../ProjectCard.astro"
 import type { LinkData } from "../../../WorkCard.astro"
 
-const projects = await getCollection('projects')
+const projects = await getCollection('projects', ({ data }: CollectionEntry<"projects">) => {
+  	return data.published === true;
+})
 ---
 
 <accordion-group id="projects">
-	<h3>Projects:</h3>
 	<div class="work-cards">
 		<ul>
 			{projects.map((p: any) => {
@@ -30,12 +30,13 @@ const projects = await getCollection('projects')
 
 				return (
 					<li>
-						<WorkCard 
+						<ProjectCard 
 							title={p.data.project_name}
 							links={links}
 							summary={p.data.summary}
 							description={p.data.description}
 							tags={p.data.tags}
+							slug={p.slug}
 							/>
 					</li>
 				)
@@ -47,7 +48,7 @@ const projects = await getCollection('projects')
 <style>
 	#projects {
 		h3 {
-			margin-bottom: 1rem;
+			margin-bottom: 2rem;
 		}
 		
 		ul {

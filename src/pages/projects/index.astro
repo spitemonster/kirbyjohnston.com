@@ -1,0 +1,33 @@
+---
+import MainLayout from "src/layouts/MainLayout.astro"
+import Frame from "src/layouts/Frame.astro"
+import Projects from "@components/sections/work/projects/Projects.astro"
+---
+<MainLayout title="Kirby Johnston | Full-Stack Developer & Technical Strategist">
+	<Frame id="section--projects">
+		<nav>
+			<menu>
+				<li><a href="/">Return</a></li>
+			</menu>
+		</nav>
+
+		<h1>Projects</h1>
+		<Projects />
+	</Frame>
+</MainLayout>
+
+<style>
+	h1 {
+		margin-bottom: 2rem;
+	}
+
+	nav {
+
+	}
+
+	menu {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+</style>

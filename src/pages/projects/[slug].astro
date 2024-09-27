@@ -1,0 +1,88 @@
+---
+import MainLayout from 'src/layouts/MainLayout.astro'
+import Frame from 'src/layouts/Frame.astro'
+import { getCollection, type CollectionEntry } from "astro:content"
+
+import Image from 'astro/components/Image.astro'
+
+interface Props {
+	project: CollectionEntry<'projects'>
+}
+
+export async function getStaticPaths() {
+	const projects: CollectionEntry<'projects'>[] = await getCollection('projects')
+	return projects.map((p) => (
+		{
+			params: {
+				slug: p.slug
+			},
+			props: {
+				project: p
+			}
+		}
+	))
+};
+
+const { project } = Astro.props;
+const {Content} = await project.render()
+---
+<MainLayout title={`Kirby Johnston | ${project.data.project_name} project breakdown`}>
+	<Frame id="section--project">
+		<nav>
+			<menu>
+				<li><a href="/projects">Return to Projects</a></li>
+				<li><a href="/">Return to Home</a></li>
+			</menu>
+		</nav>
+		<div class="heading">
+			<h1>{project.data.project_name}</h1>
+			<span>{project.data.duration}</span>
+		</div>
+		{project.data.header_image && project.data.header_image != "" &&
+			<Image class="project-header" loading="eager"
+				src={project.data.header_image}
+				alt={`A screenshot of the hero banner from ${project.data.project_name}`} width="960" height="600" />
+		}
+		<ul class="project-links">
+			{project.data.url && project.data.url != "" && 
+				<li><a href={project.data.url}>Visit {project.data.project_name}</a></li>
+			}
+			{project.data.github && project.data.github != "" &&
+				<li><a href={project.data.github}>Visit the Github</a></li>
+			}
+		</ul>
+		<Content />
+	</Frame>
+</MainLayout>
+
+<style is:global>
+
+	.heading {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 2rem;
+	}
+
+	#section--project {
+		h1 {
+			
+		}
+		
+		.project-links {
+			display: flex;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			margin-block: 1rem 2rem;
+			gap: 1rem;
+			flex-wrap: wrap;
+		}
+
+		h3 {
+			text-transform: lowercase;
+			margin-top: 2rem;
+		}
+	}
+</style>

@@ -36,6 +36,9 @@ const projectCollection = defineCollection({
         github: z.string(),
         summary: z.string(),
         description: z.string(),
+        duration: z.string(),
+        header_image: z.string(),
+        published: z.boolean(),
     }),
 })
 
