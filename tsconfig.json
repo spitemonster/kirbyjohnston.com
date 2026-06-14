@@ -3,12 +3,11 @@
     "compilerOptions": {
         "strictNullChecks": true,
         "allowJs": true,
-        "baseUrl": ".",
         "paths": {
-            "@utils": ["src/script/utils"],
-            "@components/*": ["src/components/*"],
-            "@icons/*": ["src/icons/*"],
-            "@types": ["src/types"]
+            "@utils": ["./src/script/utils"],
+            "@components/*": ["./src/components/*"],
+            "@icons/*": ["./src/icons/*"],
+            "@types": ["./src/types"]
         }
     }
 }

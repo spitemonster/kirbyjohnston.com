@@ -1,7 +1,7 @@
 ---
-import MainLayout from 'src/layouts/MainLayout.astro'
-import Frame from 'src/layouts/Frame.astro'
-import { getCollection, type CollectionEntry } from "astro:content"
+import MainLayout from '../../layouts/MainLayout.astro'
+import Frame from '../../layouts/Frame.astro'
+import { getCollection, render, type CollectionEntry } from "astro:content"
 
 import Image from 'astro/components/Image.astro'
 
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 	return projects.map((p) => (
 		{
 			params: {
-				slug: p.slug
+				slug: p.id
 			},
 			props: {
 				project: p
@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 };
 
 const { project } = Astro.props;
-const {Content} = await project.render()
+const {Content} = await render(project)
 ---
 <MainLayout title={`Kirby Johnston | ${project.data.project_name} project breakdown`}>
 	<Frame id="section--project">

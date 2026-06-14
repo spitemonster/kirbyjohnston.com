@@ -9,14 +9,14 @@
         "deploy": "rsync -azvh --progress ./dist/ kj:/var/www/html/kirbyjohnston.com --delete-after"
     },
     "dependencies": {
-        "@astrojs/mdx": "^3.1.5",
         "@fontsource/ibm-plex-mono": "^5.0.13",
         "@fontsource/inter": "^5.0.18"
     },
     "devDependencies": {
-        "@astrojs/check": "^0.5.6",
+        "@astrojs/check": "^0.9.9",
+        "@astrojs/mdx": "^6.0.3",
         "@parcel/transformer-sass": "^2.11.0",
-        "astro": "^4.4.5",
+        "astro": "^6.4.6",
         "autoprefixer": "^10.4.19",
         "cssnano": "^7.0.1",
         "postcss-comment": "^2.0.0",
