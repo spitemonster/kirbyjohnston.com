@@ -29,6 +29,7 @@
     --font-size-sm: 0.75em;
 
     scroll-behavior: smooth;
+    interpolate-size: allow-keywords;
 }
 
 body {
@@ -41,10 +42,10 @@ body {
     font-family: var(--font-sans);
     background: var(--color-background);
     color: var(--color-foreground);
-    /* font-size: 1.25em; */
     font-size: clamp(1.13rem, 0.34vi + 1.04rem, 1.31rem);
 
-    transition: color var(--transition-time) ease,
+    transition:
+        color var(--transition-time) ease,
         background var(--transition-time) ease;
 
     &.initialized {
@@ -120,7 +121,8 @@ hr {
 strong {
     background: var(--color-accent);
     color: var(--color-background);
-    transition: background var(--transition-time) ease,
+    transition:
+        background var(--transition-time) ease,
         color var(--transition-time) ease;
 }
 
@@ -160,7 +162,7 @@ strong::selection {
     }
 }
 
-// layout positioning
+/** layout positioning */
 main > nav {
     order: 2;
 }

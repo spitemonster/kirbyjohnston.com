@@ -18,25 +18,27 @@ import ControlBar from '../components/ControlBar.astro'
 </nav>
 
 <script>
-	if (window.innerWidth <= window.fontSize() * 60) {
-		// close nav when user clicks a link on mobile
-		document.querySelectorAll('nav a').forEach(l => {
-			l.addEventListener('click', () => {
-				document.documentElement.classList.remove('mobile-nav-open');
+	document.addEventListener('DOMContentLoaded', () => {
+		if (window.innerWidth <= window.fontSize() * 60) {
+			// close nav when user clicks a link on mobile
+			document.querySelectorAll('nav a').forEach(l => {
+				l.addEventListener('click', () => {
+					document.documentElement.classList.remove('mobile-nav-open');
+				});
 			});
-		});
-	} else {
-		// setup intersection observer to highlight current page in navigation
-		const navEls: HTMLLIElement[] = Array.from(document.querySelectorAll('nav li'))
-		
-		// set base width property for each nav element; used for animations
-		navEls.forEach((l) => {
-			const el = l;
+		} else {
+			// setup intersection observer to highlight current page in navigation
+			const navEls: HTMLLIElement[] = Array.from(document.querySelectorAll('nav li'))
+			
+			// set base width property for each nav element; used for animations
+			navEls.forEach((l) => {
+				const el = l;
 
-			const w = `${el.offsetWidth}px`
-			el.style.setProperty('--base-width', w)
-		})
-	}
+				const w = `${el.offsetWidth}px`
+				el.style.setProperty('--base-width', w)
+			})
+		}
+	});
 </script>
 
 <style is:global>
@@ -69,18 +71,17 @@ import ControlBar from '../components/ControlBar.astro'
 				background: transparent;
 				z-index: 2;
 				min-width: var(--base-width);
-				padding-inline: .25rem;
-				transtion: min-width var(--transition-time) ease;
+				transition: min-width var(--transition-time) ease;
 
 				a {
 					background: var(--color-background);
 					text-decoration: none;
 					height: 100%;
-					
+					padding-inline: .25rem;
 					display: inline-flex;
 					align-items: center;
 					justify-content: flex-start;
-					transition: all var(--transition-time) ease;
+					/* transition: all var(--transition-time) ease; */
 
 					&::before,
 					&::after {
@@ -106,7 +107,9 @@ import ControlBar from '../components/ControlBar.astro'
 	body[data-current='section--contact'] nav li[data-target='section--contact'] {
 		width: 100%;
 		a {
-			color: var(--color-foreground);
+			/* color: var(--color-foreground); */
+			background: var(--color-accent);
+			color: var(--color-background);
 		}
 	}
 

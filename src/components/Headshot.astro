@@ -1,9 +1,10 @@
 ---
 	import Image from "astro/components/Image.astro"
+	import me from "../images/me.webp";
 ---
 
 <figure class="img--headshot">
-	<Image src="/images/me.webp" alt="a quite handsome fella." width="212" height="212" loading="eager" />
+	<Image src={me} alt="a quite handsome fella." width="212" height="212" loading="eager" />
 </figure>
 
 <style>
@@ -15,11 +16,33 @@
 		position: relative;
 		overflow: visible;
 		border-radius: 50%;
-		filter: drop-shadow(
-			calc(var(--delta-x) * 0.5rem) calc(var(--delta-y) * 0.5rem) 0
-				var(--color-accent)
-		);
-		transition: filter calc(var(--dist) * var(--transition-time)) ease;
+
+		&::before {
+			--follower-offset: .5rem;
+
+			content: "";
+			pointer-events: none;
+
+			position: absolute;
+			top: calc(var(--follower-offset) / -2);
+			left: calc(var(--follower-offset) / -2);
+
+			display: block;
+			height: calc(100% + var(--follower-offset));
+			width: calc(100% + var(--follower-offset));
+			border-radius: 100%;
+
+			background: var(--color-accent);
+			transform: translateX(calc(var(--delta-x) * .5rem)) translateY(calc(var(--delta-y) * .5rem));
+			transition: all var(--transition-time) linear;
+		}
+
+		&:hover, &:focus {
+			&::before {
+				transition-timing-function: ease;
+				transform: none;
+			}
+		}
 
 		img {
 			border-radius: 50%;
@@ -36,3 +59,53 @@
 	}
 
 </style>
+
+<script>
+	import { getNormalizedDirection } from "@utils";
+
+	window.addEventListener('DOMContentLoaded', () => {
+		const headshot: HTMLDivElement | null =
+			document.querySelector('.img--headshot')
+
+		if (!headshot) return;
+
+		initMouseFollower(headshot);
+	});
+
+	function initMouseFollower(headshot: HTMLDivElement) {
+		// set up mouse-tracking box-shadow
+        // track mouse position on move
+        let mousePosition = { X: 0, Y: 0 }
+
+        window.addEventListener('mousemove', (e) => {
+            mousePosition.X = e.clientX
+            mousePosition.Y = e.clientY
+        })
+
+        const headshotSize = headshot.offsetWidth
+        const headshotHalfSize = headshotSize / 2
+
+        function tickMouseFollower() {
+			let headshotCenter = {
+				X: headshot!.getBoundingClientRect().left + window.scrollX + headshotHalfSize,
+				Y: headshot!.getBoundingClientRect().top + window.scrollY + headshotHalfSize
+			}
+
+            const delta = getNormalizedDirection(headshotCenter, mousePosition)
+
+            // this custom property is used in CSS to control the box shadow
+            headshot.style.setProperty('--delta-x', `${delta.x}`)
+            headshot.style.setProperty('--delta-y', `${delta.y}`)
+            headshot.style.setProperty('--dist', `${delta.distance}`)
+
+            if (window.innerWidth > window.fontSize() * 60) {
+				requestAnimationFrame(tickMouseFollower)
+			}
+        }
+
+        // only tick this on desktop
+        if (window.innerWidth > window.fontSize() * 60) {
+            requestAnimationFrame(tickMouseFollower)
+        }
+	}
+</script>

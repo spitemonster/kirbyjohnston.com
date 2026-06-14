@@ -1,5 +1,5 @@
 ---
-company_name: carney
+company_name: carney co.
 description: A digital marketing agency based in Pittsburgh, Pennsylvania
 tags:
     [

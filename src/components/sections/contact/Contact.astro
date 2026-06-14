@@ -1,9 +1,12 @@
 ---
-import { getEntry } from "astro:content";
+import { getEntry, render } from "astro:content";
 import Frame from "../../../layouts/Frame.astro";
 
 const contact = await getEntry('sections', 'contact');
-const { Content } = await contact.render();
+if (!contact) {
+  throw new Error("Contact entry not found");
+}
+const { Content } = await render(contact);
 ---
 
 <Frame id="section--contact">

@@ -1,11 +1,17 @@
 ---
-import { getEntry } from "astro:content";
+import { getEntry, render } from "astro:content";
+
 import Frame from "../../../layouts/Frame.astro";
 import Clients from "./clients/Clients.astro";
 import Employers from "./employers/Employers.astro"
 
 const work = await getEntry('sections', 'work');
-const { Content } = await work.render();
+
+if (!work) {
+  throw new Error("Work entry not found");
+}
+
+const { Content } = await render(work);
 ---
 
 <Frame id="section--work">
@@ -14,6 +20,4 @@ const { Content } = await work.render();
 	<Employers />
 	<hr>
 	<Clients />
-	<hr>
-	<a href="/projects">View some of my projects</a>
 </Frame>

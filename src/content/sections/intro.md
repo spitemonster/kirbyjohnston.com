@@ -11,4 +11,4 @@ I **love** deep dives into new languages & frameworks, collaboration with divers
 
 I **don't love** doing things the easy way if it's not the right way, unnecessarily over-complicating my work and fighting artificial deadlines.
 
-I am currently looking for the right full-time position while selectively taking on freelance projects; you can see my history [below](/#work), learn more about me [further below](/#about) or find ways to contact me [even further below](/#contact).
+You can see my history [below](/#work), learn more about me [further below](/#about) or find ways to contact me [even further below](/#contact).
