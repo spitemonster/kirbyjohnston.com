@@ -132,7 +132,7 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
             top: 0;
             left: calc(var(--offset) * -1);
             padding-inline: var(--offset);
-            transition: clip-path var(--transition-time) ease;
+            transition: clip-path var(--transition-time) ease, color var(--transition-time) ease;
         }
 
         &::before {
@@ -251,6 +251,7 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
 		display: block;
 
 		background: var(--color-accent);
+		transition: all var(--transition-time) ease;
 	}
 
     &::after {
@@ -264,7 +265,7 @@ import ArrowIcon from '@icons/icon--arrow.svg?raw'
     &::before {
         height: 100%;
         width: 0;
-        transition: width var(--transition-time) ease;
+        transition: width var(--transition-time) ease, background var(--transition-time) ease;
         z-index: -1;
     }
 

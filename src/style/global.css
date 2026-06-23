@@ -111,6 +111,7 @@ main {
 hr {
     color: var(--color-foreground);
     background: var(--color-foreground);
+    transition: all var(--transition-time) ease;
     width: 100%;
     margin-block: 2rem;
     height: 2px;
@@ -140,6 +141,7 @@ strong::selection {
         padding-block: calc(var(--header-height) + 6rem);
         &:not(#section--intro):not(:last-child) {
             border-bottom: 2px solid var(--color-foreground);
+            transition: border-color var(--transition-time) ease;
         }
     }
 

@@ -75,12 +75,15 @@ a {
         right: 0;
         background: var(--color-accent);
         z-index: -1;
+        transition: background var(--transition-time) ease;
     }
 
     &::before {
         width: 0;
         height: 100%;
-        transition: width var(--transition-time) ease;
+        transition:
+            width var(--transition-time) ease,
+            background var(--transition-time) ease;
     }
 
     &::after {
