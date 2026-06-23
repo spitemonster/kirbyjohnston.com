@@ -29,21 +29,6 @@ const clientCollection = defineCollection({
         }),
 })
 
-const projectCollection = defineCollection({
-    loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects' }),
-    schema: z.object({
-        project_name: z.string(),
-        tags: z.array(z.string()),
-        url: z.string(),
-        github: z.string(),
-        summary: z.string(),
-        description: z.string(),
-        duration: z.string(),
-        header_image: z.string(),
-        published: z.boolean(),
-    }),
-})
-
 const sectionCollection = defineCollection({
     loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/sections' }),
 })
@@ -51,6 +36,5 @@ const sectionCollection = defineCollection({
 export const collections = {
     employers: employerCollection,
     clients: clientCollection,
-    projects: projectCollection,
     sections: sectionCollection,
 }
