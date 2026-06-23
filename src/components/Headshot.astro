@@ -4,7 +4,7 @@
 ---
 
 <figure class="img--headshot">
-	<Image src={me} alt="a quite handsome fella." width="212" height="212" loading="eager" />
+	<Image src={me} alt="a quite handsome fella." width="360" height="360" loading="eager" />
 </figure>
 
 <style>
@@ -28,17 +28,19 @@
 			left: calc(var(--follower-offset) / -2);
 
 			display: block;
-			height: calc(100% + var(--follower-offset));
-			width: calc(100% + var(--follower-offset));
+			height: 100%;
+			width: 100%;
 			border-radius: 100%;
 
 			background: var(--color-accent);
-			transform: translateX(calc(var(--delta-x) * .5rem)) translateY(calc(var(--delta-y) * .5rem));
+			transform: translateX(calc(var(--delta-x) * 1rem)) translateY(calc(var(--delta-y) * 1rem));
 			transition: all var(--transition-time) linear;
 		}
 
 		&:hover, &:focus {
 			&::before {
+				height: calc(100% + var(--follower-offset));
+				width: calc(100% + var(--follower-offset));
 				transition-timing-function: ease;
 				transform: none;
 			}
