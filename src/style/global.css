@@ -127,7 +127,7 @@ strong {
 }
 
 strong::selection {
-    background: var(--color-foreground);
+    background: var(--color-accent);
     color: var(--color-background);
 }
 
