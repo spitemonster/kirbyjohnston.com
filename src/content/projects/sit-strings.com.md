@@ -7,7 +7,7 @@ summary: ''
 description: 'A marketing website for an Ohio-based guitar string maker'
 duration: 'Summer 2022'
 slug: 'sit-strings'
-header_image: '/images/projects/sit/sit__header.webp'
+header_image: '../../images/projects/sit/sit__header.webp'
 published: true
 ---
 

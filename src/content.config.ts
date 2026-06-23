@@ -31,17 +31,18 @@ const clientCollection = defineCollection({
 
 const projectCollection = defineCollection({
     loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects' }),
-    schema: z.object({
-        project_name: z.string(),
-        tags: z.array(z.string()),
-        url: z.string(),
-        github: z.string(),
-        summary: z.string(),
-        description: z.string(),
-        duration: z.string(),
-        header_image: z.string(),
-        published: z.boolean(),
-    }),
+    schema: ({ image }) =>
+        z.object({
+            project_name: z.string(),
+            tags: z.array(z.string()),
+            url: z.string(),
+            github: z.string(),
+            summary: z.string(),
+            description: z.string(),
+            duration: z.string(),
+            header_image: image(),
+            published: z.boolean(),
+        }),
 })
 
 const sectionCollection = defineCollection({

@@ -7,7 +7,7 @@ summary: ''
 description: 'A marketing website for a growing growing / farming Robot company.'
 duration: 'Autumn 2022'
 slug: 'sunrise-labs'
-header_image: '/images/projects/sl/sl__header.webp'
+header_image: '../../images/projects/sl/sl__header.webp'
 published: true
 ---
 

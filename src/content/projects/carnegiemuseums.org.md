@@ -7,7 +7,7 @@ summary: ''
 description: ''
 duration: 'Spring 2023'
 slug: 'carnegie-museums'
-header_image: '/images/projects/cmp/cmp__header.webp'
+header_image: '../../images/projects/cmp/cmp__header.webp'
 published: false
 ---
 

@@ -7,7 +7,7 @@ summary: "If you get to know me you'll learn: regardless of the domain I have a 
 description: 'An open source music distribution platform and streaming service.'
 duration: '2023-2024'
 slug: 'muso'
-header_image: '/images/projects/wm/wm__header.webp'
+header_image: '../../images/projects/wm/wm__header.webp'
 published: false
 ---
 

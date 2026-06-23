@@ -7,7 +7,7 @@ summary: ''
 description: 'A website for the Westmoreland Museum of American Art'
 duration: 'Summer 2022'
 slug: 'westmoreland-museum'
-header_image: '/images/projects/wm/wm__header.webp'
+header_image: '../../images/projects/wm/wm__header.webp'
 published: true
 ---
 

@@ -7,7 +7,7 @@ summary: ''
 description: 'A Shopify theme for a contractor education organization.'
 duration: 'Winter 2023'
 slug: 'my-contractor-exam'
-header_image: '/images/projects/mce/mce__header.webp'
+header_image: '../../images/projects/mce/mce__header.webp'
 published: true
 ---
 
