@@ -3,8 +3,6 @@ import { getCollection } from "astro:content"
 import ClientLogo from "./ClientLogo.astro";
 const clients = await getCollection('clients')
 import { shuffleArray } from "@utils";
-
-shuffleArray(clients);
 ---
 <div id="clients">
 	<h3>Selected Clients:</h3>
@@ -80,3 +78,25 @@ shuffleArray(clients);
 		}
 	}
 </style>
+
+<script>
+import { shuffleArray } from "@utils";
+
+	window.addEventListener("DOMContentLoaded", () => {
+		const clients = document.querySelector('#clients');
+		const clientLogoList = document.querySelector('.client-logos ul');
+
+		if (clients == null || clientLogoList == null) return;
+
+		const clientLogoListItems = Array.from(document.querySelectorAll('.client-logos ul > li')) as Array<HTMLElement>;
+		const newList = shuffleArray(clientLogoListItems);
+
+		clientLogoList.innerHTML = '';
+
+		newList.forEach(i => {
+			clientLogoList.appendChild(i);
+		})
+
+		clients.classList.add('initialized');
+	})
+</script>
