@@ -14,7 +14,9 @@ window.fontSize = (): number => {
 // add icon to external links
 function tagExternalLinks() {
     const links: HTMLAnchorElement[] = Array.from(
-        document.querySelectorAll('a:not(.work-card):not(nav a)')
+        document.querySelectorAll(
+            'a:not(.work-card):not(.client-logo):not(nav a)'
+        )
     )
 
     links.forEach((l: HTMLAnchorElement) => {
