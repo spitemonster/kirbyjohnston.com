@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content"
 import ClientLogo from "./ClientLogo.astro";
 const clients = await getCollection('clients')
-import { shuffleArray } from "@utils";
 ---
 <div id="clients">
 	<h3>Selected Clients:</h3>
