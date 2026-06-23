@@ -19,25 +19,19 @@ import ControlBar from '../components/ControlBar.astro'
 
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
-		if (window.innerWidth <= window.fontSize() * 60) {
-			// close nav when user clicks a link on mobile
-			document.querySelectorAll('nav a').forEach(l => {
-				l.addEventListener('click', () => {
-					document.documentElement.classList.remove('mobile-nav-open');
-				});
-			});
-		} else {
-			// setup intersection observer to highlight current page in navigation
-			const navEls: HTMLLIElement[] = Array.from(document.querySelectorAll('nav li'))
-			
-			// set base width property for each nav element; used for animations
-			navEls.forEach((l) => {
-				const el = l;
+		const navEls: HTMLLIElement[] = Array.from(document.querySelectorAll('nav li'))
 
-				const w = `${el.offsetWidth}px`
-				el.style.setProperty('--base-width', w)
-			})
-		}
+		navEls.forEach(el => {
+			const w = `${el.offsetWidth}px`
+			el.style.setProperty('--base-width', w)
+
+			// forcing type since this will never return null
+			const a: HTMLAnchorElement = el.querySelector('a') as HTMLAnchorElement;
+
+			a.addEventListener('click', () => {
+				document.documentElement.classList.remove('mobile-nav-open');	
+			});
+		})
 	});
 </script>
 
@@ -81,8 +75,7 @@ import ControlBar from '../components/ControlBar.astro'
 					display: inline-flex;
 					align-items: center;
 					justify-content: flex-start;
-					/* transition: all var(--transition-time) ease; */
-
+					transition: all var(--transition-time) ease;
 					&::before,
 					&::after {
 						display: none;
@@ -91,10 +84,8 @@ import ControlBar from '../components/ControlBar.astro'
 
 				&:hover,
 				&:focus-within {
-					min-width: calc(var(--base-width) + .25rem) !important;
 					a {
-						color: var(--color-foreground);
-						
+						color: var(--color-accent);
 					}
 				}
 			}
@@ -132,17 +123,8 @@ import ControlBar from '../components/ControlBar.astro'
 			}
 		}
 		nav {
-			/* border-top: 1px solid var(--color-foreground);
-			border-bottom: 1px solid var(--color-foreground); */
-
 			a {
-				@media (prefers-contrast: no-preference) or (prefers-contrast: less) {
-					color: var(--color-ob);
-				}
-
-				@media (prefers-contrast: more) {
-					color: var(--color-foreground);
-				}
+				color: var(--color-foreground);
 			}
 
 			& > menu {
