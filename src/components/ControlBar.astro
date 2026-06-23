@@ -31,6 +31,9 @@ import VisMode from '../components/VisMode.astro'
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
+		background: var(--color-background);
+		padding: 1rem;
+		border-radius: 4rem;
 
 		@media (prefers-contrast: no-preference) or (prefers-contrast: less) {
 			a,
@@ -46,8 +49,7 @@ import VisMode from '../components/VisMode.astro'
 		a,
 		svg,
 		path {
-			transition: color var(--transition-time) ease,
-				fill var(--transition-time) ease;
+			transition: all var(--transition-time) ease;
 		}
 
 		&:hover,
