@@ -17,16 +17,16 @@ const employerCollection = defineCollection({
 
 const clientCollection = defineCollection({
     loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/clients' }),
-    schema: z.object({
-        client_name: z.string(),
-        description: z.string(),
-        tags: z.array(z.string()).optional(),
-        url: z.string(),
-        logo: z.string(),
-        logo_alt: z.string(),
-        logo_size: z.object({ x: z.number(), y: z.number() }),
-        summary: z.string(),
-    }),
+    schema: ({ image }) =>
+        z.object({
+            client_name: z.string(),
+            description: z.string(),
+            tags: z.array(z.string()).optional(),
+            url: z.string(),
+            logo: image(),
+            logo_alt: z.string(),
+            summary: z.string(),
+        }),
 })
 
 const projectCollection = defineCollection({

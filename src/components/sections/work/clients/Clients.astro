@@ -7,20 +7,19 @@ import { shuffleArray } from "@utils";
 shuffleArray(clients);
 ---
 <div id="clients">
-	<h3>Clients:</h3>
+	<h3>Selected Clients:</h3>
 	<div class="client-logos">
 		<ul>
 			{clients.map((c: any) => {
-				const { client_name, url, logo, logo_alt, logo_size } = c.data
+				const { client_name, url, logo, logo_alt } = c.data
 
 				return (
 
 					<li>
-						<ClientLogo clientName={client_name} 
+						<ClientLogo clientName={client_name}
 							clientUrl={url}
-							logoUrl={logo}
-							logoAlt={logo_alt}
-							logoSize={logo_size} />
+							logo={logo}
+							logoAlt={logo_alt} />
 					</li>
 				)
 			})}
@@ -45,6 +44,7 @@ shuffleArray(clients);
 			list-style: none;
 
 			li {
+				display: inline-flex;
 				padding: 0;
 				margin: 0;
 			}
