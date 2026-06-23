@@ -80,7 +80,7 @@ import { shuffleArray } from "@utils";
 </style>
 
 <script>
-import { shuffleArray } from "@utils";
+	import { shuffleDomNodeArray } from "@utils";
 
 	window.addEventListener("DOMContentLoaded", () => {
 		const clients = document.querySelector('#clients');
@@ -89,7 +89,7 @@ import { shuffleArray } from "@utils";
 		if (clients == null || clientLogoList == null) return;
 
 		const clientLogoListItems = Array.from(document.querySelectorAll('.client-logos ul > li')) as Array<HTMLElement>;
-		const newList = shuffleArray(clientLogoListItems);
+		const newList = shuffleDomNodeArray(clientLogoListItems);
 
 		clientLogoList.innerHTML = '';
 
