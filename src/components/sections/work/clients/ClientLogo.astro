@@ -15,7 +15,7 @@ import Image from "astro/components/Image.astro";
 const height = 100;
 
 ---
-<a class="img--client-logo" href={clientUrl} 
+<a class="client-logo" href={clientUrl} 
 	style={`--logo-url: url('${logo.src}');`} 
 	title={clientName} >
 	<figure>
@@ -29,7 +29,7 @@ const height = 100;
 </a>
 
 <style>
-	.img--client-logo {
+	.client-logo {
 		background: var(--color-foreground);
 		transition: background var(--transition-time) ease;
 		mask-image: var(--logo-url);
