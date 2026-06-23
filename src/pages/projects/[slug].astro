@@ -38,7 +38,7 @@ const {Content} = await render(project)
 			<h1>{project.data.project_name}</h1>
 			<span>{project.data.duration}</span>
 		</div>
-		{project.data.header_image && project.data.header_image != "" &&
+		{project.data.header_image && project.data.header_image &&
 			<Image class="project-header" loading="eager"
 				src={project.data.header_image}
 				alt={`A screenshot of the hero banner from ${project.data.project_name}`} width="960" height="600" />
