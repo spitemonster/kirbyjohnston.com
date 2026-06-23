@@ -103,3 +103,9 @@ a {
         }
     }
 }
+
+/* adjust font size of inline monospace elements so their accent height matches surrounding line height */
+p strong,
+p a {
+    font-size: 97%;
+}
