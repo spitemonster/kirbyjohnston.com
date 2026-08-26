@@ -5,6 +5,6 @@ export {}
 
 declare global {
     interface Window {
-        fontSize: any
+        fontSize: number
     }
 }

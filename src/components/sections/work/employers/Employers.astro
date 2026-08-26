@@ -1,8 +1,8 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import WorkCard, { type LinkData } from "@components/WorkCard.astro";
 
-const employers = await getCollection("employers")
+const employers: CollectionEntry<'employers'>[] = await getCollection("employers")
 ---
 
 <accordion-group id="employers">
@@ -10,7 +10,7 @@ const employers = await getCollection("employers")
 	<div class="work-cards">
 		<ol>		
 			<!-- should be CollectionEntry type but don't know how to annotate it -->
-			{employers.map((employer: any) => {
+			{employers.map((employer) => {
 
 				const links: LinkData[] = [];
 
