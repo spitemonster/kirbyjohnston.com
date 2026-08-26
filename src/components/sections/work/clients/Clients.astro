@@ -1,13 +1,13 @@
 ---
-import { getCollection } from "astro:content"
+import { getCollection, type CollectionEntry } from "astro:content"
 import ClientLogo from "./ClientLogo.astro";
-const clients = await getCollection('clients')
+const clients: CollectionEntry<'clients'>[] = await getCollection('clients')
 ---
 <div id="clients">
 	<h3>Selected Clients:</h3>
 	<div class="client-logos">
 		<ul>
-			{clients.map((c: any) => {
+			{clients.map((c) => {
 				const { client_name, url, logo, logo_alt } = c.data
 
 				return (
