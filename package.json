@@ -6,6 +6,7 @@
         "dev": "astro dev",
         "build": "astro check && astro build",
         "preview": "astro preview",
+        "format": "prettier --write .",
         "deploy": "rsync -azvh --progress ./dist/ kj:/var/www/html/kirbyjohnston.com --delete-after"
     },
     "dependencies": {
@@ -23,6 +24,8 @@
         "postcss-discard-comments": "^7.0.0",
         "postcss-import": "^16.1.0",
         "postcss-preset-env": "^9.5.9",
+        "prettier": "^3.9.6",
+        "prettier-plugin-astro": "^0.14.1",
         "typescript": "^5.3.3"
     }
 }
